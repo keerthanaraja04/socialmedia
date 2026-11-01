@@ -1,0 +1,18 @@
+respondent_id,audience_segment,test_id,test_dimension,variant_chosen,confidence_rating,rationale,timestamp
+# TEMPLATE INSTRUCTIONS:
+# respondent_id: Unique string identifier for each participant (e.g. resp_01, resp_02, ...)
+# audience_segment: Target demographic (e.g. Creator / Podcaster, Video Editor / Producer, B2B Marketing Lead, Technical Founder, Social Media Manager)
+# test_id: Identifier for test dimension (test_01 to test_05)
+# test_dimension: Name of tested attribute (e.g. Video Hook, Carousel Title, Safe Zones, CTA, Visual Aesthetic)
+# variant_chosen: Either 'A' or 'B'
+# confidence_rating: 1 (low confidence) to 5 (high confidence)
+# rationale: Brief qualitative reason why the participant chose this variant
+# timestamp: ISO 8601 timestamp string (e.g. 2026-10-23T15:00:00Z)
+#
+# Minimum target: 20+ distinct respondents across all test dimensions.
+# Blank rows ready for data collection:
+resp_01,,test_01,Video Hook (First 2s Pattern Interrupt),,,
+resp_01,,test_02,LinkedIn Carousel Title Slide,,,
+resp_01,,test_03,Caption Pacing & Safe Zones,,,
+resp_01,,test_04,Call to Action (CTA),,,
+resp_01,,test_05,Thumbnail Visual Aesthetic,,,

@@ -1,0 +1,54 @@
+{
+  "asset_id": "reel_automated_content_re",
+  "asset_type": "video_vertical_9_16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 13.94,
+  "mode": "voiceover_and_captions",
+  "font_name": "DejaVu Sans Bold",
+  "font_license": "Bitstream Vera & Arev Fonts License (Free / Open Source)",
+  "brand_palette": {
+    "primary": "#0F172A",
+    "secondary": "#6366F1",
+    "accent": "#10B981",
+    "card_bg": "#1E293B",
+    "text_primary": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "hook_overlay": {
+    "text": "Stop cutting video clips manually.",
+    "category": "INCUBRIX // BREAKTHROUGH",
+    "start_sec": 0.0,
+    "end_sec": 2.0
+  },
+  "captions": [
+    {
+      "start_sec": 2.0,
+      "end_sec": 4.98,
+      "text": "Manual editing takes 2 hours per reel."
+    },
+    {
+      "start_sec": 4.98,
+      "end_sec": 7.97,
+      "text": "AI slop kills retention with bad hooks."
+    },
+    {
+      "start_sec": 7.97,
+      "end_sec": 10.96,
+      "text": "Deterministic rendering ensures safe zones."
+    },
+    {
+      "start_sec": 10.96,
+      "end_sec": 13.94,
+      "text": "Which platform drains your time most?"
+    }
+  ],
+  "source_clip": {
+    "filename": "broll_pixabay_71350_animated_wallpaper.mp4",
+    "pixabay_id": 71350,
+    "author": "bilalashrafmzon"
+  },
+  "tts_voice": "en-US-AndrewNeural",
+  "created_at": "2026-10-24T14:28:03Z"
+}

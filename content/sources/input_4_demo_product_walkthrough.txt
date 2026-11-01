@@ -1,0 +1,21 @@
+[INCUBRIX ENGINE PRODUCT DEMONSTRATION & SYSTEM WALKTHROUGH]
+[PRESENTER: DAVID CHEN, PRINCIPAL SOLUTIONS ARCHITECT]
+[TIMESTAMP: 2026-10-23]
+
+David: (00:01) Hello everyone, and welcome to this live walkthrough of the IncuBrix Autonomous Social Media Production Engine. Today, I'm going to demonstrate how we take a single long-form piece of content—like this product walkthrough—and generate over thirty high-impact production assets across TikTok, Instagram Reels, YouTube Shorts, LinkedIn, and X/Twitter in less than three minutes.
+
+David: (00:26) Let's look at the command line. The entire engine runs from a single unified command:
+`python -m src.main --input content/sources/input_1_autonomous_pipelines_blog.md`
+
+David: (00:41) When I execute this, watch what happens behind the scenes:
+First, the Ingestion Engine parses the inbound document, computes its SHA-256 fingerprint, and queries our deduplication registry. If this content had already been processed, our refresh mode would recognize it instantly and skip redundant computation.
+
+David: (01:05) Second, the Groq LPU inference layer spins up. In parallel, it extracts the core intellectual property, identifies the target audience hooks, and generates platform-native copy. For TikTok, it produces a snappy vertical video script structured around a 2-second pattern interrupt. For LinkedIn, it drafts a 4-slide carousel deck with structured bullet points and tactical frameworks.
+
+David: (01:34) Third is our Dual-Layer Brand Compliance check. The engine scans every script against our brand rules. It ensures hashtags like #IncuBrix are present, confirms that UTM tracking links are valid, checks character limits, and verifies that no ungrounded claims are made. If any rule is violated, our self-healing loop automatically refines the copy before rendering begins.
+
+David: (02:04) Fourth is visual rendering. Our VideoRenderer queries Pixabay for high-scoring vertical B-roll clips under 15 seconds, burns in timed captions positioned strictly within platform-safe margins, and overlays the hook in the first 2 seconds. In parallel, our Pillow Graphics Engine renders crisp 1080x1350 carousel slides using our official brand color palette. Every asset also saves editable JSON specifications and SVG templates so creative teams can make downstream tweaks.
+
+David: (02:40) Finally, the Export Manager organizes everything into date-stamped distribution folders. It generates a master calendar.csv with all 14 standard tracking columns, plus 1-click bulk upload files for Buffer and Hootsuite. And as you can see in the terminal output, we get an executive-level summary showing the total runtime, asset count, and exact dollar cost down to six decimal places.
+
+David: (03:10) That is the power of the IncuBrix Engine: taking hours of manual video editing and transforming it into an autonomous, repeatable pipeline. Visit https://incubrix.com to get started today!

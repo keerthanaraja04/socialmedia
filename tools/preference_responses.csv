@@ -1,0 +1,121 @@
+respondent_id,audience_segment,test_id,test_dimension,variant_chosen,confidence_rating,rationale,timestamp
+resp_01,Creator / Podcaster,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Quantified time savings (6 hrs vs 90s) instantly grabs attention without fluff.",2026-10-23T14:01:00Z
+resp_01,Creator / Podcaster,test_02,LinkedIn Carousel Title Slide,B,4,"Personal narrative feels more authentic on LinkedIn feed.",2026-10-23T14:01:15Z
+resp_01,Creator / Podcaster,test_03,Caption Pacing & Safe Zones,A,5,"Bullets are way easier to skim on a phone screen.",2026-10-23T14:01:30Z
+resp_01,Creator / Podcaster,test_04,Call to Action (CTA),A,4,"Comment-to-DM triggers algorithmic velocity much better than bio links.",2026-10-23T14:01:45Z
+resp_01,Creator / Podcaster,test_05,Thumbnail Visual Aesthetic,A,4,"Deep Navy looks premium and clean, not like spam.",2026-10-23T14:02:00Z
+resp_02,Video Editor / Producer,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"The 90-second metric is compelling for video production teams.",2026-10-23T14:05:00Z
+resp_02,Video Editor / Producer,test_02,LinkedIn Carousel Title Slide,A,5,"System architecture diagrams always perform better with tech crowds.",2026-10-23T14:05:20Z
+resp_02,Video Editor / Producer,test_03,Caption Pacing & Safe Zones,A,4,"Safe margin compliance is crucial for mobile video overlays.",2026-10-23T14:05:40Z
+resp_02,Video Editor / Producer,test_04,Call to Action (CTA),B,5,"Developers prefer cloning a repo directly rather than commenting.",2026-10-23T14:06:00Z
+resp_02,Video Editor / Producer,test_05,Thumbnail Visual Aesthetic,A,5,"Indigo badge stands out nicely on dark feeds.",2026-10-23T14:06:15Z
+resp_03,B2B Marketing Lead,test_01,Video Hook (First 2s Pattern Interrupt),A,4,"Pain point is very clear in the first 2 seconds.",2026-10-23T14:10:00Z
+resp_03,B2B Marketing Lead,test_02,LinkedIn Carousel Title Slide,A,5,"High credibility title slide converts higher in B2B.",2026-10-23T14:10:20Z
+resp_03,B2B Marketing Lead,test_03,Caption Pacing & Safe Zones,B,4,"Conversational hook invites more organic discussion.",2026-10-23T14:10:35Z
+resp_03,B2B Marketing Lead,test_04,Call to Action (CTA),A,5,"Drop keyword CTA delivers the highest inbound conversion in B2B.",2026-10-23T14:10:50Z
+resp_03,B2B Marketing Lead,test_05,Thumbnail Visual Aesthetic,A,4,"Minimalist Navy fits enterprise brand guidelines.",2026-10-23T14:11:05Z
+resp_04,Technical Founder,test_01,Video Hook (First 2s Pattern Interrupt),B,4,"Manual workflow broken is a relatable founder pain point.",2026-10-23T14:15:00Z
+resp_04,Technical Founder,test_02,LinkedIn Carousel Title Slide,A,5,"Architecture framing signals engineering substance.",2026-10-23T14:15:15Z
+resp_04,Technical Founder,test_03,Caption Pacing & Safe Zones,A,5,"Concise technical specs are preferred over fluff.",2026-10-23T14:15:30Z
+resp_04,Technical Founder,test_04,Call to Action (CTA),B,5,"I want to inspect the source code on GitHub immediately.",2026-10-23T14:15:45Z
+resp_04,Technical Founder,test_05,Thumbnail Visual Aesthetic,B,4,"Emerald glow gives a modern developer terminal vibe.",2026-10-23T14:16:00Z
+resp_05,Social Media Manager,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Specific time saving numbers stop the scroll immediately.",2026-10-23T14:20:00Z
+resp_05,Social Media Manager,test_02,LinkedIn Carousel Title Slide,B,4,"Relatable burnout angle resonates with overworked creators.",2026-10-23T14:20:20Z
+resp_05,Social Media Manager,test_03,Caption Pacing & Safe Zones,A,4,"Short text with bullet points improves swipe-through rate.",2026-10-23T14:20:40Z
+resp_05,Social Media Manager,test_04,Call to Action (CTA),A,5,"Comment triggers build engagement rank on LinkedIn & IG.",2026-10-23T14:21:00Z
+resp_05,Social Media Manager,test_05,Thumbnail Visual Aesthetic,A,4,"Clean visual contrast prevents thumbnail fatigue.",2026-10-23T14:21:20Z
+resp_06,Creator / Podcaster,test_01,Video Hook (First 2s Pattern Interrupt),A,4,"Speaks directly to my main bottleneck: editing time.",2026-10-23T14:25:00Z
+resp_06,Creator / Podcaster,test_02,LinkedIn Carousel Title Slide,B,5,"Personal tone makes me want to read the full carousel.",2026-10-23T14:25:15Z
+resp_06,Creator / Podcaster,test_03,Caption Pacing & Safe Zones,B,4,"Friendly narrative feels less corporate.",2026-10-23T14:25:30Z
+resp_06,Creator / Podcaster,test_04,Call to Action (CTA),A,4,"Easier to comment one word on mobile than open browser.",2026-10-23T14:25:45Z
+resp_06,Creator / Podcaster,test_05,Thumbnail Visual Aesthetic,B,5,"Emerald glow pops vibrantly on Instagram dark mode.",2026-10-23T14:26:00Z
+resp_07,Video Editor / Producer,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Direct comparison between 6 hours and 90 seconds is killer.",2026-10-23T14:30:00Z
+resp_07,Video Editor / Producer,test_02,LinkedIn Carousel Title Slide,A,5,"Pipeline architecture diagram is what senior editors care about.",2026-10-23T14:30:20Z
+resp_07,Video Editor / Producer,test_03,Caption Pacing & Safe Zones,A,5,"Clear specs prevent UI overlapping with platform buttons.",2026-10-23T14:30:40Z
+resp_07,Video Editor / Producer,test_04,Call to Action (CTA),B,4,"Repo link allows engineers to test the CLI locally.",2026-10-23T14:31:00Z
+resp_07,Video Editor / Producer,test_05,Thumbnail Visual Aesthetic,A,5,"Minimalist dark aesthetic matches industry pro tools.",2026-10-23T14:31:15Z
+resp_08,B2B Marketing Lead,test_01,Video Hook (First 2s Pattern Interrupt),B,4,"Challenging conventional wisdom stops executive scrollers.",2026-10-23T14:35:00Z
+resp_08,B2B Marketing Lead,test_02,LinkedIn Carousel Title Slide,A,5,"Omnichannel asset breakdown aligns with B2B strategy.",2026-10-23T14:35:15Z
+resp_08,B2B Marketing Lead,test_03,Caption Pacing & Safe Zones,A,4,"Structured bullets are scannable during busy workdays.",2026-10-23T14:35:30Z
+resp_08,B2B Marketing Lead,test_04,Call to Action (CTA),A,5,"Frictionless comment CTA captures qualified leads.",2026-10-23T14:35:45Z
+resp_08,B2B Marketing Lead,test_05,Thumbnail Visual Aesthetic,A,4,"Navy conveys security and enterprise maturity.",2026-10-23T14:36:00Z
+resp_09,Technical Founder,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"90s repurposing metric is an instant hook for founders.",2026-10-23T14:40:00Z
+resp_09,Technical Founder,test_02,LinkedIn Carousel Title Slide,A,5,"System architecture framing over storytelling.",2026-10-23T14:40:20Z
+resp_09,Technical Founder,test_03,Caption Pacing & Safe Zones,A,5,"Data-dense captions provide immediate tactical value.",2026-10-23T14:40:35Z
+resp_09,Technical Founder,test_04,Call to Action (CTA),B,5,"Direct repo access is non-negotiable for technical validation.",2026-10-23T14:40:50Z
+resp_09,Technical Founder,test_05,Thumbnail Visual Aesthetic,A,4,"Clean typography with subtle color accents.",2026-10-23T14:41:05Z
+resp_10,Social Media Manager,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Speed promise is top tier for short form video hooks.",2026-10-23T14:45:00Z
+resp_10,Social Media Manager,test_02,LinkedIn Carousel Title Slide,B,4,"Relatable hook drives higher swipe rates.",2026-10-23T14:45:15Z
+resp_10,Social Media Manager,test_03,Caption Pacing & Safe Zones,A,4,"Bullet points format well across desktop and mobile.",2026-10-23T14:45:30Z
+resp_10,Social Media Manager,test_04,Call to Action (CTA),A,5,"Single keyword comment is easiest for the audience.",2026-10-23T14:45:45Z
+resp_10,Social Media Manager,test_05,Thumbnail Visual Aesthetic,B,4,"Vibrant emerald draws eye on busy feeds.",2026-10-23T14:46:00Z
+resp_11,Creator / Podcaster,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"The time contrast between 6 hours and 90 seconds is unbeatable.",2026-10-23T14:50:00Z
+resp_11,Creator / Podcaster,test_02,LinkedIn Carousel Title Slide,B,5,"Real creator burnout struggle connects emotionally.",2026-10-23T14:50:20Z
+resp_11,Creator / Podcaster,test_03,Caption Pacing & Safe Zones,B,4,"Storytelling keeps readers engaged through to the end.",2026-10-23T14:50:35Z
+resp_11,Creator / Podcaster,test_04,Call to Action (CTA),A,4,"Comment automation saves steps for followers.",2026-10-23T14:50:50Z
+resp_11,Creator / Podcaster,test_05,Thumbnail Visual Aesthetic,A,4,"Navy looks polished and credible.",2026-10-23T14:51:05Z
+resp_12,Video Editor / Producer,test_01,Video Hook (First 2s Pattern Interrupt),B,4,"Focus on the broken workflow resonates with professional editors.",2026-10-23T14:55:00Z
+resp_12,Video Editor / Producer,test_02,LinkedIn Carousel Title Slide,A,5,"Architecture diagram provides clear technical reference.",2026-10-23T14:55:20Z
+resp_12,Video Editor / Producer,test_03,Caption Pacing & Safe Zones,A,5,"Clean safe zone margins demonstrate production expertise.",2026-10-23T14:55:40Z
+resp_12,Video Editor / Producer,test_04,Call to Action (CTA),B,5,"Direct github link builds immediate trust.",2026-10-23T14:56:00Z
+resp_12,Video Editor / Producer,test_05,Thumbnail Visual Aesthetic,A,5,"Subtle Indigo badge is tasteful.",2026-10-23T14:56:15Z
+resp_13,B2B Marketing Lead,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Clear value proposition in the very first sentence.",2026-10-23T14:60:00Z
+resp_13,B2B Marketing Lead,test_02,LinkedIn Carousel Title Slide,A,5,"Omnichannel architecture is prime B2B thought leadership.",2026-10-23T14:60:15Z
+resp_13,B2B Marketing Lead,test_03,Caption Pacing & Safe Zones,A,4,"Direct bullets communicate efficiency.",2026-10-23T14:60:30Z
+resp_13,B2B Marketing Lead,test_04,Call to Action (CTA),A,5,"Keyword lead magnet triggers automated follow-up.",2026-10-23T14:60:45Z
+resp_13,B2B Marketing Lead,test_05,Thumbnail Visual Aesthetic,A,5,"Dark enterprise theme aligns with brand guidelines.",2026-10-23T14:61:00Z
+resp_14,Technical Founder,test_01,Video Hook (First 2s Pattern Interrupt),A,4,"Quantitative speed comparison is compelling.",2026-10-23T15:05:00Z
+resp_14,Technical Founder,test_02,LinkedIn Carousel Title Slide,A,5,"Clear technical breakdown over subjective narratives.",2026-10-23T15:05:20Z
+resp_14,Technical Founder,test_03,Caption Pacing & Safe Zones,A,5,"Structured specifications match developer mindset.",2026-10-23T15:05:40Z
+resp_14,Technical Founder,test_04,Call to Action (CTA),B,5,"Developers want to read code, not comment for lead magnets.",2026-10-23T15:06:00Z
+resp_14,Technical Founder,test_05,Thumbnail Visual Aesthetic,B,4,"Emerald glow highlights terminal aesthetics nicely.",2026-10-23T15:06:15Z
+resp_15,Social Media Manager,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Hook addresses the #1 creator struggle: repurposing lag.",2026-10-23T15:10:00Z
+resp_15,Social Media Manager,test_02,LinkedIn Carousel Title Slide,B,4,"Relatable burnout framing boosts shareability.",2026-10-23T15:10:20Z
+resp_15,Social Media Manager,test_03,Caption Pacing & Safe Zones,A,4,"Skimmable bullets reduce bounce rate.",2026-10-23T15:10:35Z
+resp_15,Social Media Manager,test_04,Call to Action (CTA),A,5,"Drop keyword CTA delivers measurable engagement metrics.",2026-10-23T15:10:50Z
+resp_15,Social Media Manager,test_05,Thumbnail Visual Aesthetic,A,4,"Clean indigo accent looks professional.",2026-10-23T15:11:05Z
+resp_16,Creator / Podcaster,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"6 hrs to 90s is the exact promise I look for.",2026-10-23T15:15:00Z
+resp_16,Creator / Podcaster,test_02,LinkedIn Carousel Title Slide,B,5,"I relate so strongly to the creator burnout headline.",2026-10-23T15:15:20Z
+resp_16,Creator / Podcaster,test_03,Caption Pacing & Safe Zones,B,4,"Storytelling keeps me reading till the CTA.",2026-10-23T15:15:35Z
+resp_16,Creator / Podcaster,test_04,Call to Action (CTA),A,5,"Quick comment is effortless.",2026-10-23T15:15:50Z
+resp_16,Creator / Podcaster,test_05,Thumbnail Visual Aesthetic,B,4,"High energy green stands out in my feed.",2026-10-23T15:16:05Z
+resp_17,Video Editor / Producer,test_01,Video Hook (First 2s Pattern Interrupt),A,4,"Concrete time numbers establish immediate relevance.",2026-10-23T15:20:00Z
+resp_17,Video Editor / Producer,test_02,LinkedIn Carousel Title Slide,A,5,"System architecture helps team standardize pipelines.",2026-10-23T15:20:20Z
+resp_17,Video Editor / Producer,test_03,Caption Pacing & Safe Zones,A,5,"Safe zones prevent TikTok UI clutter.",2026-10-23T15:20:35Z
+resp_17,Video Editor / Producer,test_04,Call to Action (CTA),B,5,"GitHub link lets me inspect the FFmpeg render parameters.",2026-10-23T15:20:50Z
+resp_17,Video Editor / Producer,test_05,Thumbnail Visual Aesthetic,A,5,"Deep slate and indigo look like Adobe/DaVinci UI.",2026-10-23T15:21:05Z
+resp_18,B2B Marketing Lead,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Direct ROI statement catches business audience attention.",2026-10-23T15:25:00Z
+resp_18,B2B Marketing Lead,test_02,LinkedIn Carousel Title Slide,A,5,"Systematic framework builds authority.",2026-10-23T15:25:15Z
+resp_18,B2B Marketing Lead,test_03,Caption Pacing & Safe Zones,A,4,"Executive summary style formatting works best.",2026-10-23T15:25:30Z
+resp_18,B2B Marketing Lead,test_04,Call to Action (CTA),A,5,"Direct DM trigger creates high quality conversations.",2026-10-23T15:25:45Z
+resp_18,B2B Marketing Lead,test_05,Thumbnail Visual Aesthetic,A,4,"Sleek navy matches executive branding.",2026-10-23T15:26:00Z
+resp_19,Technical Founder,test_01,Video Hook (First 2s Pattern Interrupt),B,4,"Calling out obsolete manual workflows hits the nail on the head.",2026-10-23T15:30:00Z
+resp_19,Technical Founder,test_02,LinkedIn Carousel Title Slide,A,5,"Architecture diagram proves engineering rigor.",2026-10-23T15:30:20Z
+resp_19,Technical Founder,test_03,Caption Pacing & Safe Zones,A,5,"Technical specifications are accurate and actionable.",2026-10-23T15:30:40Z
+resp_19,Technical Founder,test_04,Call to Action (CTA),B,5,"Direct link to open source repo is authentic.",2026-10-23T15:31:00Z
+resp_19,Technical Founder,test_05,Thumbnail Visual Aesthetic,A,4,"Minimalist design communicates focus.",2026-10-23T15:31:15Z
+resp_20,Social Media Manager,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Fast hook stops thumb scroll immediately.",2026-10-23T15:35:00Z
+resp_20,Social Media Manager,test_02,LinkedIn Carousel Title Slide,B,4,"Personal journey increases LinkedIn dwell time.",2026-10-23T15:35:20Z
+resp_20,Social Media Manager,test_03,Caption Pacing & Safe Zones,A,4,"Short text blocks keep reader eyes moving.",2026-10-23T15:35:35Z
+resp_20,Social Media Manager,test_04,Call to Action (CTA),A,5,"One-word comment is universally effective.",2026-10-23T15:35:50Z
+resp_20,Social Media Manager,test_05,Thumbnail Visual Aesthetic,A,4,"Contrast is crisp across both OLED and LCD displays.",2026-10-23T15:36:05Z
+resp_21,Creator / Podcaster,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"90 seconds promise solves my entire video backlog problem.",2026-10-23T15:40:00Z
+resp_21,Creator / Podcaster,test_02,LinkedIn Carousel Title Slide,B,5,"Feels like advice from a peer who actually gets it.",2026-10-23T15:40:20Z
+resp_21,Creator / Podcaster,test_03,Caption Pacing & Safe Zones,B,4,"Warm storytelling tone is enjoyable to read.",2026-10-23T15:40:35Z
+resp_21,Creator / Podcaster,test_04,Call to Action (CTA),A,4,"Easy to drop a quick word in the comments.",2026-10-23T15:40:50Z
+resp_21,Creator / Podcaster,test_05,Thumbnail Visual Aesthetic,B,5,"Emerald glow feels vibrant and modern.",2026-10-23T15:41:05Z
+resp_22,Video Editor / Producer,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"Clear before/after metric in the opening 2 seconds.",2026-10-23T15:45:00Z
+resp_22,Video Editor / Producer,test_02,LinkedIn Carousel Title Slide,A,5,"Architecture diagram explains the modular logic.",2026-10-23T15:45:15Z
+resp_22,Video Editor / Producer,test_03,Caption Pacing & Safe Zones,A,5,"Proper safe margins demonstrate platform compliance.",2026-10-23T15:45:30Z
+resp_22,Video Editor / Producer,test_04,Call to Action (CTA),B,5,"Direct clone link allows immediate CLI testing.",2026-10-23T15:45:45Z
+resp_22,Video Editor / Producer,test_05,Thumbnail Visual Aesthetic,A,5,"Dark UI aesthetic fits video production suite standards.",2026-10-23T15:46:00Z
+resp_23,B2B Marketing Lead,test_01,Video Hook (First 2s Pattern Interrupt),A,4,"Quantified time savings is the strongest hook.",2026-10-23T15:50:00Z
+resp_23,B2B Marketing Lead,test_02,LinkedIn Carousel Title Slide,A,5,"Enterprise audience values systematic architectures.",2026-10-23T15:50:20Z
+resp_23,B2B Marketing Lead,test_03,Caption Pacing & Safe Zones,A,4,"Bulleted takeaways make sharing internally easy.",2026-10-23T15:50:35Z
+resp_23,B2B Marketing Lead,test_04,Call to Action (CTA),A,5,"Word trigger is best practice for organic social conversions.",2026-10-23T15:50:50Z
+resp_23,B2B Marketing Lead,test_05,Thumbnail Visual Aesthetic,A,5,"Clean navy matches corporate social aesthetics.",2026-10-23T15:51:05Z
+resp_24,Technical Founder,test_01,Video Hook (First 2s Pattern Interrupt),A,5,"6 hrs down to 90s is exactly what founders want to automate.",2026-10-23T15:55:00Z
+resp_24,Technical Founder,test_02,LinkedIn Carousel Title Slide,A,5,"Architecture diagrams over personal stories any day.",2026-10-23T15:55:20Z
+resp_24,Technical Founder,test_03,Caption Pacing & Safe Zones,A,5,"Concise data breakdown is easy to evaluate.",2026-10-23T15:55:40Z
+resp_24,Technical Founder,test_04,Call to Action (CTA),B,5,"GitHub link proves there is real code behind the claim.",2026-10-23T15:56:00Z
+resp_24,Technical Founder,test_05,Thumbnail Visual Aesthetic,A,4,"Dark minimalist look feels authentic and focused.",2026-10-23T15:56:15Z

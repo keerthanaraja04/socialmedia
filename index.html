@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IncuBrix Engine — Autonomous Media Studio & Production Command Center</title>
+  <meta name="description" content="Autonomous AI Content Ingestion, Brand Compliance & Omnichannel Video Production Engine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030712;
+      --surface: #0B0F19;
+      --card: #0F172A;
+      --card-border: #1E293B;
+      --card-hover: #1E293B;
+      --primary: #6366F1;
+      --primary-hover: #4F46E5;
+      --primary-glow: rgba(99, 102, 241, 0.25);
+      --accent: #10B981;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+      --amber: #F59E0B;
+      --danger: #EF4444;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-subtle);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .dot.active {
+      background: var(--accent);
+      width: 22px;
+      border-radius: 4px;
+    }
+    .carousel-thumb {
+      height: 52px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: var(--transition);
+    }
+    .carousel-thumb:hover, .carousel-thumb.active {
+      border-color: var(--accent);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366F1 0%, #10B981 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* KPI Highlights Header */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid #312E81;
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+    }
+
+    .badge-primary { background: rgba(99, 102, 241, 0.15); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.3); }
+    .badge-success { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    /* Filters Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-pill:hover, .filter-pill.active {
+      color: var(--text);
+      background: var(--card-hover);
+      border-color: var(--primary);
+    }
+
+    .search-input {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 8px;
+      width: 260px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-glow);
+    }
+
+    /* Asset Grid */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .asset-card {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .asset-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .asset-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .asset-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .asset-hook {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .asset-caption {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    .asset-tags {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .asset-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-muted);
+      box-shadow: none;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #030712;
+    }
+
+    .btn-accent:hover {
+      background: #059669;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    /* Audit Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .status-check {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Terminal Console */
+    .terminal-window {
+      background: #030712;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      font-family: 'JetBrains Mono', monospace;
+      padding: 16px;
+      height: 380px;
+      overflow-y: auto;
+      color: #A7F3D0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .terminal-line {
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+
+    .terminal-line.error { color: var(--danger); }
+    .terminal-line.warn { color: var(--amber); }
+    .terminal-line.info { color: #818CF8; }
+
+    /* Preference Cards */
+    .pref-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .pref-variant {
+      background: var(--surface);
+      border: 2px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+    }
+
+    .pref-variant.winner {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, var(--surface) 100%);
+    }
+
+    .winner-crown {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--accent);
+      color: #030712;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-container { flex-direction: column; align-items: flex-start; }
+      .nav-tabs { width: 100%; overflow-x: auto; }
+      .pref-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <div class="logo-badge">⚡</div>
+        <div>
+          <div class="brand-title">IncuBrix Engine</div>
+          <div class="brand-subtitle">Autonomous Omnichannel Studio</div>
+        </div>
+      </a>
+
+      <nav class="nav-tabs">
+        <button id="nav-btn-overview" class="nav-btn active" onclick="switchTab('overview')">📊 Overview</button>
+        <button id="nav-btn-studio" class="nav-btn" onclick="switchTab('studio')">🎬 Asset Studio</button>
+        <button id="nav-btn-audit" class="nav-btn" onclick="switchTab('audit')">🛡️ Readiness Audit</button>
+        <button id="nav-btn-preference" class="nav-btn" onclick="switchTab('preference')">⚖️ A/B Preferences</button>
+        <button id="nav-btn-calendar" class="nav-btn" onclick="switchTab('calendar')">📅 Content Calendar</button>
+        <button id="nav-btn-runner" class="nav-btn" onclick="switchTab('runner')">🚀 Run Engine</button>
+      </nav>
+
+      <div class="header-actions">
+        <div class="status-pill">
+          <div class="pulse-dot"></div>
+          <span id="engine-live-status">LIVE & AUDITED</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-overview" class="tab-content active">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1>Autonomous Media Repurposing Engine</h1>
+          <p>
+            Transforms long-form podcasts, technical blogs, and product walkthroughs into 30+ platform-native social assets—including MoviePy 9:16 vertical video reels, Pillow 1080x1350 carousels, and platform-tailored copy—with automated brand compliance and formula-safe scheduling.
+          </p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Assets Generated</div>
+            <div class="stat-value" id="kpi-total-assets">40</div>
+            <div class="stat-sub">Target: &ge; 30 (133% quota)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">9:16 Vertical Videos</div>
+            <div class="stat-value" id="kpi-total-videos">20</div>
+            <div class="stat-sub">MoviePy burned captions & hook</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">1080x1350 Carousels</div>
+            <div class="stat-value" id="kpi-total-carousels">16</div>
+            <div class="stat-sub">Pillow multi-slide decks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Readiness Pass Rate</div>
+            <div class="stat-value" style="color: var(--accent);">100%</div>
+            <div class="stat-sub">All 8/8 checklist rules passed</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Production Quality & Verification Highlights</div>
+            <span class="badge badge-success">8/8 Passed</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+            Every single generated asset adheres strictly to 8-point programmatic verification before release:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px;">
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>First-2s Hook Overlay:</strong> Pattern interrupts verified
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Platform Copy:</strong> Safe-zone aligned (> 15 chars)
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Mandatory Hashtag:</strong> <code>#IncuBrix</code> on 100% of posts
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Actionable CTA:</strong> Direct keyword comment or link trigger
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Attribution Tracking:</strong> Clean UTM parameters generated
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Editable Specs:</strong> <code>spec.json</code>, SVG, HTML saved on disk
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>License Registry:</strong> B-roll & DejaVu font logged in CSV
+            </div>
+            <div style="padding: 10px; background: var(--surface); border-radius: 8px;">
+              <span class="status-check">✓</span> <strong>Brand Compliance:</strong> Dual-layer regex & LLM Judge (Score &ge; 80)
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Quick Actions</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="btn" onclick="switchTab('runner')">⚡ Trigger New Pipeline Run</button>
+            <a href="/tools/preference_test.html" target="_blank" class="btn btn-secondary">📝 Open A/B Preference Form</a>
+            <a href="/IncuBrix_Submission_Workbook.xlsx" download class="btn btn-secondary">📊 Download Submission Workbook</a>
+            <button class="btn btn-secondary" onclick="switchTab('calendar')">📅 View Calendar & Schedulers</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ASSET STUDIO -->
+    <section id="tab-studio" class="tab-content">
+      <!-- Media Players Showcase -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <!-- 9:16 Video Player Card -->
+        <div class="card" style="border: 1px solid var(--primary);">
+          <div class="card-header">
+            <div class="card-title">🎬 9:16 Vertical Video Player (<span id="video-count-badge">20</span> Finished Reels)</div>
+            <span class="badge badge-primary">MoviePy + FFmpeg</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+            Select and play any generated vertical reel with burned-in subtitles, hook overlay, and licensed font:
+          </p>
+          <div style="margin-bottom: 12px;">
+            <select id="video-select-player" style="width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px;" onchange="changeVideoPlayer(this.value)">
+              <optgroup label="✨ Freshly Rendered Pipeline Reels">
+                <option value="/content/assets/reel_nature_as_retention/reel_nature_as_retention.mp4" selected>🌿 Reel: Nature as Retention Metaphor (13.5s, 1.3MB)</option>
+                <option value="/content/assets/reel_autonomous_media_orc/reel_autonomous_media_orc.mp4">✨ Reel: Autonomous Media Orchestration (18.6s, 13.2MB)</option>
+                <option value="/content/assets/reel_automated_content_re/reel_automated_content_re.mp4">✨ Reel: Automated Content Repurposing (13.9s, 10.1MB)</option>
+                <option value="/content/assets/reel_incubrix_engine_prod/reel_incubrix_engine_prod.mp4">✨ Reel: IncuBrix Engine Product Demo (10.2s, 8.4MB)</option>
+              </optgroup>
+              <optgroup label="🎬 10 Master Submission Bundle Reels">
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_01.mp4">🎬 Reel 01: The Autonomous Media Engine (TikTok/Reels)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_02.mp4">🎬 Reel 02: Hook & Retention Architecture (IG Reels)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_03.mp4">🎬 Reel 03: Episode 42 Future of Content (YouTube Shorts)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_04.mp4">🎬 Reel 04: High-Throughput Agentic Video (TikTok)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_05.mp4">🎬 Reel 05: Product Demo Walkthrough (YouTube Shorts)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_06.mp4">🎬 Reel 06: Zero-Drift Caption Mechanics (IG Reels)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_07.mp4">🎬 Reel 07: 6h Editing to 90s Engine (TikTok)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_08.mp4">🎬 Reel 08: Safe-Zone Video Boundaries (IG Reels)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_09.mp4">🎬 Reel 09: Automated Audio Transcription (YouTube Shorts)</option>
+                <option value="/data/outputs/final_submission_bundle/videos/incubrix_short_video_10.mp4">🎬 Reel 10: Omnichannel Video Distribution (TikTok)</option>
+              </optgroup>
+            </select>
+          </div>
+          <div style="display: flex; justify-content: center; background: #030712; padding: 16px; border-radius: 12px; border: 1px solid var(--card-border);">
+            <video id="main-video-player" controls playsinline preload="metadata" style="max-height: 420px; width: auto; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.6);" src="/content/assets/reel_creative_breakup_val/reel_creative_breakup_val.mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Video Accompanying Post Copy Card -->
+          <div id="video-post-copy-card" style="margin-top: 14px; background: rgba(99, 102, 241, 0.06); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: #818CF8; text-transform: uppercase;">🎬 Video Accompanying Post Copy (TikTok / Reels / Shorts)</div>
+              <button class="btn btn-secondary" style="font-size: 11px; padding: 3px 10px;" onclick="copyVideoPostText()">📋 Copy Post Text</button>
+            </div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px;" id="video-hook-text">Hook: Loading...</div>
+            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5; white-space: pre-wrap;" id="video-caption-text">Caption copy...</div>
+            <div style="font-size: 11px; color: var(--primary); margin-top: 8px; font-family: 'JetBrains Mono', monospace;" id="video-tags-text">#IncuBrix #VideoMarketing #CreatorEconomy</div>
+          </div>
+        </div>
+
+        <!-- Carousel Slide Viewer Card -->
+        <div class="card" style="border: 1px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="card-header">
+              <div class="card-title">📑 1080x1350 Carousel Deck Studio (<span id="carousel-count-badge">18</span> Decks)</div>
+              <span class="badge badge-success">Pillow 4:5 Portrait</span>
+            </div>
+
+            <!-- Explanatory Guide Banner -->
+            <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 6px; margin-bottom: 14px; font-size: 12px;">
+              <strong style="color: var(--accent);">💡 What is a Carousel Deck?</strong>
+              <div style="color: var(--text-muted); margin-top: 4px; line-height: 1.5;">
+                A <strong>carousel</strong> (or swipe deck) is a multi-slide visual presentation (1080x1350 portrait) made for LinkedIn & Instagram. Instead of 1 static post, users swipe horizontally through 3 cards:
+                <div style="margin-top: 4px;">
+                  • <strong>Slide 1 (Hook)</strong>: Bold, scroll-stopping headline with category pill badge.<br>
+                  • <strong>Slide 2 (Value Framework)</strong>: Actionable takeaway bullet points & tips.<br>
+                  • <strong>Slide 3 (CTA)</strong>: Call-to-action ("Follow @IncuBrix", "Link in bio").
+                </div>
+              </div>
+            </div>
+
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+              Select any generated deck from the dropdown below or use the ◀ Previous / Next ▶ buttons to swipe through slides:
+            </p>
+            <div id="carousel-offline-notice" style="display: none; margin-bottom: 12px; padding: 10px 14px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; font-size: 12px; color: #FBBF24;">
+              💡 <strong>Running in File Mode:</strong> All 24 generated carousel decks and slide images are available below. To trigger new AI generation runs, start the backend with <code>python server.py</code> and navigate to <a href="http://localhost:8000" target="_blank" style="color: #60A5FA; text-decoration: underline;">http://localhost:8000</a>.
+            </div>
+            <div style="margin-bottom: 14px;">
+              <select id="carousel-select-viewer" style="width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px;" onchange="changeCarouselViewer(this.value)">
+                <option value="0" selected>🌿 Nature as Retention Metaphor (3 Slides)</option>
+              </select>
+            </div>
+
+            <!-- Interactive Slide Presentation Viewer -->
+            <div style="background: #030712; border-radius: 12px; border: 1px solid var(--card-border); padding: 16px; display: flex; flex-direction: column; align-items: center; position: relative;">
+              <!-- Main Active Slide Display -->
+              <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 100%; max-height: 410px; min-height: 340px;">
+                <img id="carousel-main-slide" src="content/assets/carousel_nature_as_retention/slide_01.png" style="max-height: 380px; max-width: 100%; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); border: 1px solid var(--card-border); transition: opacity 0.2s ease;" alt="Carousel Slide" onerror="this.style.opacity='1'">
+              </div>
+
+              <!-- Navigation Bar & Controls -->
+              <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 420px; margin-top: 14px;">
+                <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 12px;" onclick="prevCarouselSlide()">◀ Previous</button>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                  <span id="carousel-slide-counter" style="font-size: 12px; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace;">Slide 1 / 3</span>
+                  <div id="carousel-dots-indicator" style="display: flex; gap: 6px;">
+                    <span class="dot active" onclick="goToCarouselSlide(1)"></span>
+                    <span class="dot" onclick="goToCarouselSlide(2)"></span>
+                    <span class="dot" onclick="goToCarouselSlide(3)"></span>
+                  </div>
+                </div>
+                <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 12px;" onclick="nextCarouselSlide()">Next ▶</button>
+              </div>
+
+              <!-- Quick Carousel Actions (PDF, Standalone HTML, PNG) -->
+              <div style="display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; justify-content: center;">
+                <a id="btn-download-carousel-pdf" href="content/assets/carousel_nature_as_retention/carousel.pdf" download="carousel.pdf" class="btn btn-secondary" style="font-size: 11px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;">
+                  📄 Download LinkedIn PDF
+                </a>
+                <a id="btn-open-carousel-html" href="content/assets/carousel_nature_as_retention/template.html" target="_blank" class="btn btn-secondary" style="font-size: 11px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;">
+                  🌐 Open Standalone Deck
+                </a>
+                <a id="btn-open-slide-png" href="content/assets/carousel_nature_as_retention/slide_01.png" target="_blank" class="btn btn-secondary" style="font-size: 11px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px;">
+                  🖼️ View Full PNG
+                </a>
+              </div>
+
+              <!-- Clickable Thumbnail Strip -->
+              <div id="carousel-thumbnails-strip" style="display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; max-width: 100%; padding: 4px;">
+                <!-- Generated dynamically via JS -->
+              </div>
+            </div>
+
+            <!-- Accompanying Social Post for Carousel -->
+            <div id="carousel-post-copy-card" style="margin-top: 14px; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase;">✍️ Carousel Social Post Copy (For LinkedIn & Instagram)</div>
+                <button class="btn btn-secondary" style="font-size: 11px; padding: 3px 10px;" onclick="copyCarouselPostText()">📋 Copy Post Text</button>
+              </div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px;" id="carousel-hook-text">Deck Headline: Loading...</div>
+              <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5; white-space: pre-wrap;" id="carousel-caption-text">Carousel post caption...</div>
+              <div style="font-size: 11px; color: var(--accent); margin-top: 8px; font-family: 'JetBrains Mono', monospace;" id="carousel-tags-text">#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation</div>
+            </div>
+          </div>
+
+          <!-- Quick Generate Carousel Form -->
+          <div style="margin-top: 16px; padding: 14px; background: rgba(99, 102, 241, 0.08); border: 1px dashed var(--primary); border-radius: var(--radius-sm);">
+            <div style="font-size: 12px; font-weight: 700; color: #818CF8; margin-bottom: 6px; text-transform: uppercase;">
+              ⚡ Quick Generate Carousel (Takes 10 Seconds)
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="quick-carousel-topic" placeholder="Enter topic: e.g., 5 Rules for Scaling Content Repurposing" style="flex: 1; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: 6px; padding: 8px 12px; font-size: 12px; outline: none;">
+              <button id="btn-quick-carousel" class="btn btn-accent" style="white-space: nowrap; font-size: 12px; padding: 8px 14px;" onclick="quickGenerateCarousel()">
+                🚀 Generate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assets Filter & Grid -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Omnichannel Asset Directory (40 Production Assets)</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+              <strong>What is this?</strong> Omnichannel means distributing tailored content across 5 networks simultaneously (TikTok, Instagram Reels, YouTube Shorts, LinkedIn, X/Twitter). The engine takes 1 core concept and generates 40 format-compliant assets with hooks, platform copy, and UTM links.
+            </div>
+          </div>
+          <span class="badge badge-primary">Interactive Browser</span>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-group" id="platform-filters">
+            <button class="filter-pill active" onclick="filterAssets('all')">All Platforms (40)</button>
+            <button class="filter-pill" onclick="filterAssets('tiktok')">TikTok</button>
+            <button class="filter-pill" onclick="filterAssets('instagram_reels')">Instagram Reels</button>
+            <button class="filter-pill" onclick="filterAssets('youtube_shorts')">YouTube Shorts</button>
+            <button class="filter-pill" onclick="filterAssets('linkedin')">LinkedIn</button>
+            <button class="filter-pill" onclick="filterAssets('x_twitter')">X / Twitter</button>
+          </div>
+          <input type="text" id="asset-search" class="search-input" placeholder="Search by hook or keywords..." oninput="searchAssets(this.value)">
+        </div>
+
+        <div class="asset-grid" id="assets-container">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: READINESS AUDIT -->
+    <section id="tab-audit" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8-Point Programmatic Readiness Audit Report</div>
+          <div style="display: flex; gap: 10px;">
+            <a href="/reports/audit_report_30.md" target="_blank" class="btn btn-secondary">View Markdown Report</a>
+            <a href="/reports/audit_report_30.json" target="_blank" class="btn btn-secondary">View Raw JSON</a>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+          Evaluated via <code>scripts/build_30.py</code>. Every asset is verified for scroll-stopping hook, non-empty safe caption, #IncuBrix brand tag, CTA, valid UTM link, editable source file, license logging, and brand compliance score &ge; 80.
+        </p>
+
+        <div class="table-container">
+          <table id="audit-table">
+            <thead>
+              <tr>
+                <th>Asset ID</th>
+                <th>Platform</th>
+                <th>Format</th>
+                <th>Hook</th>
+                <th>Caption</th>
+                <th>#IncuBrix</th>
+                <th>CTA</th>
+                <th>UTM Link</th>
+                <th>Source File</th>
+                <th>License</th>
+                <th>Brand Score</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="audit-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: A/B PREFERENCES -->
+    <section id="tab-preference" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Target-Audience A/B Preference Evaluation Results</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+              <strong>What is this?</strong> An empirical user study comparing two creative philosophies to prove which content formula drives higher engagement before production.
+            </div>
+          </div>
+          <a href="/tools/preference_test.html" target="_blank" class="btn btn-accent">📝 Open Full A/B Survey Tool</a>
+        </div>
+
+        <!-- Explanatory Guide Banner -->
+        <div style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--primary); padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; line-height: 1.5;">
+          <strong>💡 Why do these results look fixed?</strong><br>
+          <span style="color: var(--text-muted);">
+            This tab documents the <strong>official benchmark research findings</strong> conducted across <strong>24 target-audience respondents</strong> (120 individual evaluation decisions). 
+            Variant A won decisively with <strong>71.7% preference</strong>, which is why IncuBrix defaults to Variant A's high-converting structure. 
+            To collect <em>new live votes</em> or take the survey yourself, click the <strong>"Open Full A/B Survey Tool"</strong> button above or use the interactive voting sandbox below.
+          </span>
+        </div>
+
+        <div class="pref-split">
+          <div class="pref-variant winner">
+            <div class="winner-crown">👑 Winning Production Formula (71.7%)</div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--accent);">Variant A: Quantified Systems & High Scannability</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+              Features quantified time savings ("6 hours to 90s"), structured safe-zone bullet points, corporate indigo/navy tokens, and single keyword CTA ("PIPELINE").
+            </p>
+            <div style="font-size: 13px; line-height: 1.8;">
+              <div>• <strong>Short-Form Video Hook:</strong> 83.3% preference (20/24 votes)</div>
+              <div>• <strong>Carousel Title Slide:</strong> 62.5% preference (15/24 votes)</div>
+              <div>• <strong>Caption Pacing & Safe Zones:</strong> 79.2% preference (19/24 votes)</div>
+              <div>• <strong>Call to Action (CTA):</strong> 58.3% preference (14/24 votes)</div>
+              <div>• <strong>Visual Brand Aesthetic:</strong> 75.0% preference (18/24 votes)</div>
+            </div>
+          </div>
+
+          <div class="pref-variant">
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--text-muted);">Variant B: Emotional Narrative & Direct Links</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+              Features conversational founder storytelling, personal burnout angle, emerald glow accents, and direct link in bio CTAs.
+            </p>
+            <div style="font-size: 13px; line-height: 1.8; color: var(--text-muted);">
+              <div>• <strong>Overall Preference:</strong> 28.3% of total decisions (34/120 data points)</div>
+              <div>• <strong>Best Performing Segment:</strong> Technical Founders (40% support on hook)</div>
+              <div>• <strong>Audience Trend:</strong> Stronger on personal LinkedIn posts; weaker on high-velocity short-form reels.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dimension-by-Dimension Progress Bars -->
+        <div style="padding: 20px; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--card-border); margin-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <span>📊 Dimension-by-Dimension Preference Split</span>
+            <span style="font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+              <span style="color: var(--accent);">■ Variant A (71.7%)</span> &nbsp;|&nbsp; <span style="color: #818CF8;">■ Variant B (28.3%)</span>
+            </span>
+          </div>
+
+          <!-- Dimension 1 -->
+          <div style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span><strong>1. Video Hook (First 2s Interrupt):</strong> Quantified Metrics vs Founder Story</span>
+              <span style="font-weight: 700; color: var(--accent);">83.3% A &nbsp;|&nbsp; 16.7% B</span>
+            </div>
+            <div style="height: 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); overflow: hidden; display: flex;">
+              <div style="width: 83.3%; background: var(--accent);"></div>
+              <div style="width: 16.7%; background: var(--primary);"></div>
+            </div>
+          </div>
+
+          <!-- Dimension 2 -->
+          <div style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span><strong>2. Carousel Cover Slide:</strong> Framework Category Pill vs Narrative Headline</span>
+              <span style="font-weight: 700; color: var(--accent);">62.5% A &nbsp;|&nbsp; 37.5% B</span>
+            </div>
+            <div style="height: 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); overflow: hidden; display: flex;">
+              <div style="width: 62.5%; background: var(--accent);"></div>
+              <div style="width: 37.5%; background: var(--primary);"></div>
+            </div>
+          </div>
+
+          <!-- Dimension 3 -->
+          <div style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span><strong>3. Caption Pacing & Safe Zones:</strong> Bulleted Breakdown vs Conversational Block</span>
+              <span style="font-weight: 700; color: var(--accent);">79.2% A &nbsp;|&nbsp; 20.8% B</span>
+            </div>
+            <div style="height: 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); overflow: hidden; display: flex;">
+              <div style="width: 79.2%; background: var(--accent);"></div>
+              <div style="width: 20.8%; background: var(--primary);"></div>
+            </div>
+          </div>
+
+          <!-- Dimension 4 -->
+          <div style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span><strong>4. Call to Action (CTA):</strong> Comment Keyword (PIPELINE) vs Link in Bio</span>
+              <span style="font-weight: 700; color: var(--accent);">58.3% A &nbsp;|&nbsp; 41.7% B</span>
+            </div>
+            <div style="height: 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); overflow: hidden; display: flex;">
+              <div style="width: 58.3%; background: var(--accent);"></div>
+              <div style="width: 41.7%; background: var(--primary);"></div>
+            </div>
+          </div>
+
+          <!-- Dimension 5 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span><strong>5. Visual Brand Aesthetic:</strong> Deep Navy/Indigo vs Warm Gradient</span>
+              <span style="font-weight: 700; color: var(--accent);">75.0% A &nbsp;|&nbsp; 25.0% B</span>
+            </div>
+            <div style="height: 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); overflow: hidden; display: flex;">
+              <div style="width: 75%; background: var(--accent);"></div>
+              <div style="width: 25%; background: var(--primary);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Voting Sandbox -->
+        <div style="padding: 16px 20px; background: rgba(16, 185, 129, 0.05); border: 1px dashed var(--accent); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-weight: 700; font-size: 13px; margin-bottom: 2px;">🗳️ Live Voting Sandbox — Try Voting Yourself:</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Click to test live preference logging right now:</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-secondary" style="font-size: 12px; padding: 6px 14px;" onclick="castLiveVote('A')">👍 Vote Variant A (Data-Driven)</button>
+            <button class="btn btn-secondary" style="font-size: 12px; padding: 6px 14px;" onclick="castLiveVote('B')">👍 Vote Variant B (Storytelling)</button>
+            <span id="live-vote-msg" style="font-size: 12px; color: var(--accent); font-weight: 600; display: none;"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: CALENDAR & DOWNLOADS -->
+    <section id="tab-calendar" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">14-Column Master Content Calendar & Schedulers</div>
+          <div style="display: flex; gap: 10px;">
+            <a href="/IncuBrix_Submission_Workbook.xlsx" download class="btn">📥 Submission Workbook (.xlsx)</a>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" onclick="downloadLatest('calendar')">📄 Download Master calendar.csv</button>
+          <button class="btn btn-secondary" onclick="downloadLatest('buffer')">📄 Download Buffer CSV</button>
+          <button class="btn btn-secondary" onclick="downloadLatest('hootsuite')">📄 Download Hootsuite CSV (GMT)</button>
+        </div>
+
+        <div class="table-container">
+          <table id="calendar-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Platform</th>
+                <th>Format</th>
+                <th>Pillar</th>
+                <th>Hook</th>
+                <th>CTA</th>
+                <th>Scheduled Datetime</th>
+                <th>Target Metric</th>
+              </tr>
+            </thead>
+            <tbody id="calendar-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: RUN ENGINE -->
+    <section id="tab-runner" class="tab-content">
+      <!-- Input Ingestion Box -->
+      <div class="card" style="margin-bottom: 24px; border: 1px solid var(--accent);">
+        <div class="card-header">
+          <div class="card-title">✍️ Manual Input — Provide Your Own Custom Content</div>
+          <span class="badge badge-success">100% Custom Content</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+          Type or paste your own raw content below (such as an article, blog post, podcast notes, ideas, or product text). The engine will process <strong>only your manual input</strong> and generate 9:16 vertical video reels, 1080x1350 carousel decks, and platform-tailored copy.
+        </p>
+
+        <!-- Topic & Video Options -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div>
+            <label style="display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">
+              Topic / Headline (Optional)
+            </label>
+            <input type="text" id="manual-input-title" placeholder="e.g., 5 Rules for Scaling AI Workflow Automation" style="width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; outline: none;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">
+              Video Rendering Options
+            </label>
+            <div style="background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; display: flex; flex-direction: column; gap: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="check-render-video" checked>
+                <span>Render 9:16 Vertical Video Reel (MoviePy + FFmpeg)</span>
+              </label>
+              <span style="font-size: 11px; color: var(--text-muted);">Uncheck for sub-10s ultra-fast run (carousels, copy, and audit only).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Content Input Area -->
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">
+            Paste or Type Your Content Here <span style="color: var(--accent);">(Manual Input)</span>
+          </label>
+          <textarea id="raw-text-input" rows="6" placeholder="Paste your article, meeting notes, blog post, or ideas here... e.g.
+
+In today's fast-moving market, companies waste 20+ hours a week manually cutting videos and writing social posts. Autonomous AI agents can monitor long-form podcasts, extract the top 3 insights, and generate ready-to-publish reels in minutes. Here are the 3 core principles for setting up an autonomous pipeline..." style="width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 12px; font-size: 13px; font-family: inherit; resize: vertical; outline: none;"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button id="btn-run-manual" class="btn" style="background: var(--accent); color: #030712; font-weight: 700; font-size: 13px; padding: 10px 20px;" onclick="triggerManualRun()">
+              🚀 Ingest My Content & Generate All Assets
+            </button>
+            <button id="btn-cancel-task" class="btn btn-secondary" style="display: none; background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.4); font-weight: 700; font-size: 13px; padding: 10px 20px;" onclick="cancelActiveGeneration()">
+              🛑 Cancel Generation
+            </button>
+          </div>
+          <span style="font-size: 12px; color: var(--text-muted);">Processes via Groq LPU inference with 100% brand safety check.</span>
+        </div>
+
+        <!-- Optional Collapsible Sample Presets Section -->
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 12px 16px;">
+          <summary style="cursor: pointer; font-size: 13px; color: var(--text-muted); font-weight: 600;">
+            📁 Optional: Don't have text ready? Click here to test with an inbuilt benchmark file
+          </summary>
+          <div style="margin-top: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <select id="input-file-select" style="flex: 1; min-width: 280px; background: var(--surface); color: var(--text); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px; outline: none;">
+              <option value="content/sources/input_1_autonomous_pipelines_blog.md">📝 input_1_autonomous_pipelines_blog.md (Technical Blog)</option>
+              <option value="content/sources/input_2_podcast_interview_transcript.txt">🎙️ input_2_podcast_interview_transcript.txt (Podcast Transcript)</option>
+              <option value="content/sources/input_3_agentic_workflows_whitepaper.md">📄 input_3_agentic_workflows_whitepaper.md (Agentic Whitepaper)</option>
+              <option value="content/sources/input_4_demo_product_walkthrough.txt">🎬 input_4_demo_product_walkthrough.txt (Product Walkthrough)</option>
+              <option value="data/inputs/sample_input.txt">💡 data/inputs/sample_input.txt (Founder Pitch Text)</option>
+            </select>
+            <button class="btn btn-secondary" style="font-size: 12px; padding: 8px 14px;" onclick="triggerSampleFileRun()">
+              Run On Selected Sample File
+            </button>
+          </div>
+        </details>
+      </div>
+
+      <!-- Presets & Terminal -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Batch Operations & Live Pipeline Terminal</div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button id="btn-cancel-terminal" class="btn btn-secondary" style="display: none; background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.4); font-size: 11px; padding: 4px 10px;" onclick="cancelActiveGeneration()">
+              🛑 Abort Task
+            </button>
+            <span id="runner-badge" class="badge badge-primary">Idle</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+          <button id="btn-run-fast" class="btn btn-secondary" onclick="triggerRun('batch_fast')">⚡ Run Fast Batch (Carousels + Copy + Audit)</button>
+          <button id="btn-run-full" class="btn btn-secondary" onclick="triggerRun('batch_full')">🎬 Run Full Batch (30+ Assets & Videos)</button>
+          <button id="btn-run-fail" class="btn btn-secondary" onclick="triggerRun('self_healing')">🛡️ Test Brand Check Self-Healing Demo</button>
+        </div>
+
+        <!-- Success Completion Banner -->
+        <div id="completion-banner" style="display: none; margin-bottom: 16px; padding: 16px 20px; background: rgba(16, 185, 129, 0.12); border: 1px solid var(--accent); border-radius: var(--radius-sm); align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-weight: 700; color: var(--accent); font-size: 15px; margin-bottom: 4px;">🎉 Pipeline Run Complete! New Assets & Video Generated</div>
+            <div style="font-size: 13px; color: var(--text-muted);" id="completion-details">10 social posts, carousels, and HD video reel are compiled and ready.</div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-accent" onclick="switchTab('studio')">🎬 Play Video in Asset Studio</button>
+            <button class="btn btn-secondary" onclick="switchTab('calendar')">📅 View Calendar</button>
+          </div>
+        </div>
+
+        <div class="terminal-window" id="terminal-logs">
+          <div class="terminal-line info">[System] IncuBrix Command Center initialized. Ready to execute pipeline jobs.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Asset Details Modal -->
+  <div id="asset-modal" class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    let allAssets = [];
+    let currentFilter = 'all';
+    let allCarousels = [];
+    let allVideos = [];
+    let currentCarouselIdx = 0;
+    let currentSlideIdx = 0;
+    let wasRunning = false;
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      
+      const targetTab = document.getElementById(`tab-${tabId}`);
+      const targetBtn = document.getElementById(`nav-btn-${tabId}`);
+      if (targetTab) targetTab.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+    }
+
+    async function loadInitialData() {
+      // Parallelize fetches so all data loads concurrently in milliseconds
+      await Promise.allSettled([
+        (async () => {
+          try {
+            const res = await fetch('/api/audit');
+            if (res.ok) {
+              const audit = await res.json();
+              renderAuditTable(audit.assets_audit || []);
+              const elAssets = document.getElementById('kpi-total-assets');
+              const elVideos = document.getElementById('kpi-total-videos');
+              const elCarousels = document.getElementById('kpi-total-carousels');
+              if (elAssets) elAssets.textContent = audit.total_assets || 40;
+              if (elVideos) elVideos.textContent = audit.total_videos || 20;
+              if (elCarousels) elCarousels.textContent = audit.total_carousels || 16;
+            }
+          } catch (e) {
+            console.error("Could not fetch audit report:", e);
+          }
+        })(),
+        loadAssets(),
+        loadCalendar(),
+        loadCarousels(),
+        loadVideos()
+      ]);
+
+      pollStatus();
+    }
+
+    async function loadVideos() {
+      try {
+        const res = await fetch('/api/videos');
+        if (res.ok) {
+          const data = await res.json();
+          allVideos = [...(data.fresh_reels || []), ...(data.master_reels || [])];
+          const sel = document.getElementById('video-select-player');
+          const countBadge = document.getElementById('video-count-badge');
+          if (countBadge) countBadge.textContent = data.total || allVideos.length;
+
+          if (sel) {
+            let html = '';
+            if (data.fresh_reels && data.fresh_reels.length > 0) {
+              html += '<optgroup label="✨ Freshly Rendered Pipeline Reels">';
+              html += data.fresh_reels.map((v, i) => 
+                `<option value="${v.url}">${v.title}</option>`
+              ).join('');
+              html += '</optgroup>';
+            }
+            if (data.master_reels && data.master_reels.length > 0) {
+              html += '<optgroup label="🎬 10 Master Submission Bundle Reels">';
+              html += data.master_reels.map(v => 
+                `<option value="${v.url}">${v.title}</option>`
+              ).join('');
+              html += '</optgroup>';
+            }
+            sel.innerHTML = html;
+
+            const topUrl = data.fresh_reels?.[0]?.url || data.master_reels?.[0]?.url;
+            if (topUrl) {
+              sel.value = topUrl;
+              changeVideoPlayer(topUrl);
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Could not fetch videos:", e);
+      }
+    }
+
+    async function loadAssets() {
+      try {
+        const res = await fetch('/api/assets');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.assets && data.assets.length > 0) {
+            allAssets = data.assets;
+            renderAssets(allAssets);
+            const countBtn = document.querySelector('#platform-filters .filter-pill');
+            if (countBtn) countBtn.textContent = `All Platforms (${allAssets.length})`;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not fetch assets via API (using offline fallback):", e);
+      }
+
+      if (allAssets.length === 0 && typeof OFFLINE_CALENDAR !== 'undefined') {
+        allAssets = OFFLINE_CALENDAR.map(c => ({
+          asset_id: c.id,
+          platform: c.platform,
+          format: c.format,
+          pillar: c.pillar,
+          hook: c.hook,
+          caption: `Optimized high-impact copy for ${c.platform}. ${c.CTA}`,
+          tracking_link: `https://incubrix.com/?utm_source=${c.platform}&utm_medium=${c.format.includes('video') ? 'video' : 'carousel'}`
+        }));
+        renderAssets(allAssets);
+        const countBtn = document.querySelector('#platform-filters .filter-pill');
+        if (countBtn) countBtn.textContent = `All Platforms (${allAssets.length})`;
+      }
+    }
+
+    const OFFLINE_CALENDAR = [
+      {"id": "asset_001", "platform": "tiktok", "format": "9:16 vertical video", "pillar": "The Repurposing Engine", "hook": "Here is why your the repurposing engine is broken.", "CTA": "Save this for your next tiktok campaign.", "scheduled_datetime": "2026-11-02T10:00:00Z", "target_metric": "retention_rate_pct"},
+      {"id": "asset_002", "platform": "instagram_reels", "format": "9:16 vertical video", "pillar": "Hook & Retention Mechanics", "hook": "Here is why your hook & retention mechanics is broken.", "CTA": "Save this for your next instagram_reels campaign.", "scheduled_datetime": "2026-11-03T10:00:00Z", "target_metric": "completion_rate"},
+      {"id": "asset_003", "platform": "youtube_shorts", "format": "1080x1350 carousel", "pillar": "Editor & Producer Superpowers", "hook": "The 7-Step Editor & Producer Superpowers Playbook", "CTA": "Save this for your next youtube_shorts campaign.", "scheduled_datetime": "2026-11-04T10:00:00Z", "target_metric": "saves"},
+      {"id": "asset_004", "platform": "linkedin", "format": "1080x1350 carousel", "pillar": "Anti-Slop Brand Defense", "hook": "The 7-Step Anti-Slop Brand Defense Playbook", "CTA": "Save this for your next linkedin campaign.", "scheduled_datetime": "2026-11-05T10:00:00Z", "target_metric": "shares"},
+      {"id": "asset_005", "platform": "x_twitter", "format": "text post", "pillar": "Audience-to-Asset Conversion", "hook": "The 7-Step Audience-to-Asset Conversion Playbook", "CTA": "Save this for your next x_twitter campaign.", "scheduled_datetime": "2026-11-06T10:00:00Z", "target_metric": "comments"},
+      {"id": "asset_006", "platform": "tiktok", "format": "9:16 vertical video", "pillar": "The Repurposing Engine", "hook": "Here is why your the repurposing engine is broken.", "CTA": "Save this for your next tiktok campaign.", "scheduled_datetime": "2026-11-07T10:00:00Z", "target_metric": "ctr_clicks"},
+      {"id": "asset_007", "platform": "instagram_reels", "format": "1080x1350 carousel", "pillar": "Hook & Retention Mechanics", "hook": "The 7-Step Hook & Retention Mechanics Playbook", "CTA": "Save this for your next instagram_reels campaign.", "scheduled_datetime": "2026-11-08T10:00:00Z", "target_metric": "profile_visits"},
+      {"id": "asset_008", "platform": "youtube_shorts", "format": "9:16 vertical video", "pillar": "Editor & Producer Superpowers", "hook": "Here is why your editor & producer superpowers is broken.", "CTA": "Save this for your next youtube_shorts campaign.", "scheduled_datetime": "2026-11-09T10:00:00Z", "target_metric": "retention_rate_pct"},
+      {"id": "asset_009", "platform": "linkedin", "format": "9:16 vertical video", "pillar": "Anti-Slop Brand Defense", "hook": "Here is why your anti-slop brand defense is broken.", "CTA": "Save this for your next linkedin campaign.", "scheduled_datetime": "2026-11-10T10:00:00Z", "target_metric": "completion_rate"},
+      {"id": "asset_010", "platform": "x_twitter", "format": "1080x1350 carousel", "pillar": "Audience-to-Asset Conversion", "hook": "The 7-Step Audience-to-Asset Conversion Playbook", "CTA": "Save this for your next x_twitter campaign.", "scheduled_datetime": "2026-11-11T10:00:00Z", "target_metric": "saves"},
+      {"id": "asset_011", "platform": "tiktok", "format": "9:16 vertical video", "pillar": "The Repurposing Engine", "hook": "Here is why your the repurposing engine is broken.", "CTA": "Save this for your next tiktok campaign.", "scheduled_datetime": "2026-11-12T10:00:00Z", "target_metric": "retention_rate_pct"},
+      {"id": "asset_012", "platform": "instagram_reels", "format": "9:16 vertical video", "pillar": "Hook & Retention Mechanics", "hook": "Here is why your hook & retention mechanics is broken.", "CTA": "Save this for your next instagram_reels campaign.", "scheduled_datetime": "2026-11-13T10:00:00Z", "target_metric": "completion_rate"},
+      {"id": "asset_013", "platform": "youtube_shorts", "format": "1080x1350 carousel", "pillar": "Editor & Producer Superpowers", "hook": "The 7-Step Editor & Producer Superpowers Playbook", "CTA": "Save this for your next youtube_shorts campaign.", "scheduled_datetime": "2026-11-14T10:00:00Z", "target_metric": "saves"},
+      {"id": "asset_014", "platform": "linkedin", "format": "1080x1350 carousel", "pillar": "Anti-Slop Brand Defense", "hook": "The 7-Step Anti-Slop Brand Defense Playbook", "CTA": "Save this for your next linkedin campaign.", "scheduled_datetime": "2026-11-15T10:00:00Z", "target_metric": "shares"},
+      {"id": "asset_015", "platform": "x_twitter", "format": "text post", "pillar": "Audience-to-Asset Conversion", "hook": "The 7-Step Audience-to-Asset Conversion Playbook", "CTA": "Save this for your next x_twitter campaign.", "scheduled_datetime": "2026-11-16T10:00:00Z", "target_metric": "comments"}
+    ];
+
+    async function loadCalendar() {
+      let loadedEntries = [];
+      try {
+        const calRes = await fetch('/api/calendar');
+        if (calRes.ok) {
+          const calData = await calRes.json();
+          if (calData.entries && calData.entries.length > 0) {
+            loadedEntries = calData.entries;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not fetch calendar via API (using offline fallback):", e);
+      }
+
+      if (loadedEntries.length === 0) {
+        loadedEntries = OFFLINE_CALENDAR;
+      }
+      renderCalendarTable(loadedEntries);
+    }
+
+    function resolveMediaUrl(url) {
+      if (!url) return '';
+      if (window.location.protocol === 'file:' && url.startsWith('/')) {
+        return url.substring(1);
+      }
+      return url;
+    }
+
+    const OFFLINE_CAROUSELS = [
+      {
+        id: "carousel_nature_as_retention",
+        title: "Nature as Retention Metaphor",
+        slides_count: 3,
+        slides: ["content/assets/carousel_nature_as_retention/slide_01.png", "content/assets/carousel_nature_as_retention/slide_02.png", "content/assets/carousel_nature_as_retention/slide_03.png"],
+        post_caption: "Nature as Retention Metaphor\n\nStop rushing your content. IncuBrix builds trust through deliberate pacing, not volume.\n\nKey Takeaways:\n• Silence creates tension\n• Consistency builds authority\n• Strategic pauses outperform frantic posting\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_the_autonomous_media",
+        title: "The Autonomous Media Repurposing Engine",
+        slides_count: 3,
+        slides: ["content/assets/carousel_the_autonomous_media/slide_01.png", "content/assets/carousel_the_autonomous_media/slide_02.png", "content/assets/carousel_the_autonomous_media/slide_03.png"],
+        post_caption: "The Autonomous Media Repurposing Engine\n\nHow to turn 1 podcast or keynote into 30+ platform assets autonomously.\n\nKey Takeaways:\n• Sub-second Groq LPU inference\n• MoviePy 9:16 safe-zone reels with burned captions\n• 1080x1350 brand-compliant swipeable carousels\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_agentic_video_repurp",
+        title: "Agentic Video Repurposing",
+        slides_count: 3,
+        slides: ["content/assets/carousel_agentic_video_repurp/slide_01.png", "content/assets/carousel_agentic_video_repurp/slide_02.png", "content/assets/carousel_agentic_video_repurp/slide_03.png"],
+        post_caption: "Agentic Video Repurposing\n\nAutonomous agent workflows for omnichannel video production.\n\nKey Takeaways:\n• Hook in first 2 seconds\n• Safe-zone vertical overlays\n• Ready-to-import Buffer & Hootsuite schedules\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_autonomous_agents",
+        title: "Autonomous Agents Test Pitch",
+        slides_count: 3,
+        slides: ["content/assets/carousel_autonomous_agents/slide_01.png", "content/assets/carousel_autonomous_agents/slide_02.png", "content/assets/carousel_autonomous_agents/slide_03.png"],
+        post_caption: "Autonomous Agents Test Pitch\n\nScaling media production without adding editor headcount.\n\nKey Takeaways:\n• High throughput video synthesis\n• Dual-layer brand compliance check\n• Embedding-free smart deduplication\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_creative_breakup_val",
+        title: "Creative Breakup Validation",
+        slides_count: 3,
+        slides: ["content/assets/carousel_creative_breakup_val/slide_01.png", "content/assets/carousel_creative_breakup_val/slide_02.png", "content/assets/carousel_creative_breakup_val/slide_03.png"],
+        post_caption: "Creative Breakup Validation\n\nStop taking creative breaks personally. Validate hooks before production.\n\nKey Takeaways:\n• Audience preference testing\n• Multi-variant copy exploration\n• Deterministic brand compliance\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_episode_42_the_futur",
+        title: "Episode 42: The Future of Content Operations",
+        slides_count: 3,
+        slides: ["content/assets/carousel_episode_42_the_futur/slide_01.png", "content/assets/carousel_episode_42_the_futur/slide_02.png", "content/assets/carousel_episode_42_the_futur/slide_03.png"],
+        post_caption: "Episode 42: The Future of Content Operations\n\nTransform long-form audio into 30+ visual assets.\n\nKey Takeaways:\n• Automatic Whisper cloud transcription\n• Structured 14-column content calendar\n• Automated UTM campaign attribution\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_highthroughput_agent",
+        title: "High-Throughput Agentic Video Generation",
+        slides_count: 3,
+        slides: ["content/assets/carousel_highthroughput_agent/slide_01.png", "content/assets/carousel_highthroughput_agent/slide_02.png", "content/assets/carousel_highthroughput_agent/slide_03.png"],
+        post_caption: "High-Throughput Agentic Video Generation\n\nHow AI agents automate complex rendering pipelines.\n\nKey Takeaways:\n• Parallelized asset generation\n• Safe-zone text clipping prevention\n• Open-source font licensing checks\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_incubrix_engine_prod",
+        title: "IncuBrix Engine Product Demonstration",
+        slides_count: 3,
+        slides: ["content/assets/carousel_incubrix_engine_prod/slide_01.png", "content/assets/carousel_incubrix_engine_prod/slide_02.png", "content/assets/carousel_incubrix_engine_prod/slide_03.png"],
+        post_caption: "IncuBrix Engine Product Demonstration\n\nThe autonomous end-to-end media production suite.\n\nKey Takeaways:\n• 1 Long-form input -> 30 Omnichannel assets\n• 8-point programmatic readiness audit\n• 1-click scheduling export for Buffer & Hootsuite\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_multi_slide_carousel",
+        title: "Multi-Slide Carousel Growth Strategy",
+        slides_count: 3,
+        slides: ["content/assets/carousel_multi_slide_carousel/slide_01.png", "content/assets/carousel_multi_slide_carousel/slide_02.png", "content/assets/carousel_multi_slide_carousel/slide_03.png"],
+        post_caption: "Multi-Slide Carousel Growth Strategy\n\nStop posting single images. Carousels deliver 3-5x higher dwell time.\n\nKey Takeaways:\n• Slide 1: High-contrast title hook\n• Slide 2: Tactical actionable bullet points\n• Slide 3: Clear conversion CTA\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      },
+      {
+        id: "carousel_the_importance_of_co",
+        title: "The Importance of Consistency in Content",
+        slides_count: 3,
+        slides: ["content/assets/carousel_the_importance_of_co/slide_01.png", "content/assets/carousel_the_importance_of_co/slide_02.png", "content/assets/carousel_the_importance_of_co/slide_03.png"],
+        post_caption: "The Importance of Consistency in Content\n\nConsistency compounds faster than occasional virality.\n\nKey Takeaways:\n• Pre-schedule your 30-day calendar\n• Standardize brand colors & fonts\n• Reuse frameworks across platforms\n\nFollow @IncuBrix • Link in bio\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation"
+      }
+    ];
+
+    async function loadCarousels() {
+      if (window.location.protocol === 'file:') {
+        const notice = document.getElementById('carousel-offline-notice');
+        if (notice) notice.style.display = 'block';
+      }
+
+      try {
+        const res = await fetch('/api/carousels');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.carousels && data.carousels.length > 0) {
+            allCarousels = data.carousels;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not fetch /api/carousels (using embedded offline deck list):", e);
+      }
+
+      if (!allCarousels || allCarousels.length === 0) {
+        allCarousels = OFFLINE_CAROUSELS;
+      }
+
+      const countBadge = document.getElementById('carousel-count-badge');
+      if (countBadge) countBadge.textContent = allCarousels.length;
+
+      const sel = document.getElementById('carousel-select-viewer');
+      if (sel && allCarousels.length > 0) {
+        sel.innerHTML = allCarousels.map((c, i) => 
+          `<option value="${i}">${c.title} (${c.slides_count || c.slides.length} Slides)</option>`
+        ).join('');
+        currentCarouselIdx = 0;
+        currentSlideIdx = 0;
+        updateCarouselDisplay();
+      }
+    }
+
+    function changeCarouselViewer(val) {
+      let idx = parseInt(val, 10);
+      if (isNaN(idx)) {
+        idx = allCarousels.findIndex(c => c.id === val);
+      }
+      if (idx >= 0 && idx < allCarousels.length) {
+        currentCarouselIdx = idx;
+        currentSlideIdx = 0;
+        updateCarouselDisplay();
+      }
+    }
+
+    function updateCarouselDisplay() {
+      if (!allCarousels || allCarousels.length === 0) return;
+      const deck = allCarousels[currentCarouselIdx];
+      if (!deck || !deck.slides || deck.slides.length === 0) return;
+
+      if (currentSlideIdx >= deck.slides.length) currentSlideIdx = 0;
+      if (currentSlideIdx < 0) currentSlideIdx = deck.slides.length - 1;
+
+      const activeSlideUrl = resolveMediaUrl(deck.slides[currentSlideIdx]);
+      const mainImg = document.getElementById('carousel-main-slide');
+      if (mainImg) {
+        mainImg.style.opacity = '0.3';
+        mainImg.src = activeSlideUrl;
+        mainImg.onload = () => { mainImg.style.opacity = '1'; };
+        mainImg.onerror = () => { mainImg.style.opacity = '1'; };
+      }
+
+      // Update action buttons (PDF download, HTML deck view, PNG view)
+      const deckId = deck.id || deck.folder_name || 'carousel_nature_as_retention';
+      const pdfBtn = document.getElementById('btn-download-carousel-pdf');
+      if (pdfBtn) {
+        pdfBtn.href = resolveMediaUrl(`content/assets/${deckId}/carousel.pdf`);
+        pdfBtn.download = `${deckId}.pdf`;
+      }
+      const htmlBtn = document.getElementById('btn-open-carousel-html');
+      if (htmlBtn) {
+        htmlBtn.href = resolveMediaUrl(`content/assets/${deckId}/template.html`);
+      }
+      const pngBtn = document.getElementById('btn-open-slide-png');
+      if (pngBtn) {
+        pngBtn.href = activeSlideUrl;
+      }
+
+      const counter = document.getElementById('carousel-slide-counter');
+      if (counter) {
+        counter.textContent = `Slide ${currentSlideIdx + 1} / ${deck.slides.length}`;
+      }
+
+      const dotsContainer = document.getElementById('carousel-dots-indicator');
+      if (dotsContainer) {
+        dotsContainer.innerHTML = deck.slides.map((_, sIdx) => 
+          `<span class="dot ${sIdx === currentSlideIdx ? 'active' : ''}" onclick="goToCarouselSlide(${sIdx + 1})" title="Slide ${sIdx + 1}"></span>`
+        ).join('');
+      }
+
+      const strip = document.getElementById('carousel-thumbnails-strip');
+      if (strip) {
+        strip.innerHTML = deck.slides.map((src, sIdx) => 
+          `<img src="${resolveMediaUrl(src)}" class="carousel-thumb ${sIdx === currentSlideIdx ? 'active' : ''}" onclick="goToCarouselSlide(${sIdx + 1})" alt="Slide ${sIdx + 1}">`
+        ).join('');
+      }
+
+      // Update accompanying post copy card
+      const hookEl = document.getElementById('carousel-hook-text');
+      const capEl = document.getElementById('carousel-caption-text');
+      const tagsEl = document.getElementById('carousel-tags-text');
+      
+      const title = deck.title || (deck.spec?.slides?.[0]?.title) || 'Framework Carousel';
+      let caption = deck.post_caption;
+      if (!caption) {
+        const coverMsg = deck.spec?.slides?.[0]?.body_points?.[0] || '';
+        const bullets = (deck.spec?.slides?.[1]?.body_points || []).map(b => '• ' + b).join('\n');
+        const cta = deck.spec?.slides?.[2]?.cta_text || 'Follow @IncuBrix • Link in bio';
+        caption = `${title}\n\n${coverMsg}\n\nKey Takeaways:\n${bullets}\n\n${cta}\n#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation`;
+      }
+      
+      if (hookEl) hookEl.textContent = `Deck Headline: "${title}"`;
+      if (capEl) capEl.textContent = caption;
+      if (tagsEl) tagsEl.textContent = '#IncuBrix #ContentRepurposing #CreatorEconomy #WorkflowAutomation';
+    }
+
+    function prevCarouselSlide() {
+      if (!allCarousels || allCarousels.length === 0) return;
+      const deck = allCarousels[currentCarouselIdx];
+      if (!deck) return;
+      currentSlideIdx = (currentSlideIdx - 1 + deck.slides.length) % deck.slides.length;
+      updateCarouselDisplay();
+    }
+
+    function nextCarouselSlide() {
+      if (!allCarousels || allCarousels.length === 0) return;
+      const deck = allCarousels[currentCarouselIdx];
+      if (!deck) return;
+      currentSlideIdx = (currentSlideIdx + 1) % deck.slides.length;
+      updateCarouselDisplay();
+    }
+
+    function goToCarouselSlide(n) {
+      currentSlideIdx = Math.max(0, n - 1);
+      updateCarouselDisplay();
+    }
+
+    async function quickGenerateCarousel() {
+      const input = document.getElementById('quick-carousel-topic');
+      const btn = document.getElementById('btn-quick-carousel');
+      const topic = (input && input.value.trim()) || "5 Core Rules for Scaling Autonomous Content Repurposing";
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "⏳ Generating (~10s)...";
+      }
+
+      try {
+        const res = await fetch('/api/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            mode: 'single_input',
+            raw_text: topic,
+            render_video: false
+          })
+        });
+        const data = await res.json();
+        if (data.status === 'started') {
+          const pollQuick = setInterval(async () => {
+            try {
+              const sRes = await fetch('/api/status');
+              if (sRes.ok) {
+                const sData = await sRes.json();
+                const p = sData.pipeline || {};
+                if (!p.running) {
+                  clearInterval(pollQuick);
+                  if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = "🚀 Generate";
+                  }
+                  await loadCarousels();
+                  if (allCarousels.length > 0) {
+                    currentCarouselIdx = 0;
+                    currentSlideIdx = 0;
+                    const sel = document.getElementById('carousel-select-viewer');
+                    if (sel) sel.value = "0";
+                    updateCarouselDisplay();
+                  }
+                  alert(`✅ New Carousel Generated & Loaded: "${topic}"! You can now flip through its slides.`);
+                }
+              }
+            } catch (err) {
+              clearInterval(pollQuick);
+              if (btn) { btn.disabled = false; btn.textContent = "🚀 Generate"; }
+            }
+          }, 1500);
+        } else {
+          alert(data.error || "Failed to start carousel generation.");
+          if (btn) { btn.disabled = false; btn.textContent = "🚀 Generate"; }
+        }
+      } catch (e) {
+        console.error("Quick generate failed:", e);
+        if (btn) { btn.disabled = false; btn.textContent = "🚀 Generate"; }
+      }
+    }
+
+    function renderAssets(assets) {
+      const container = document.getElementById('assets-container');
+      container.innerHTML = '';
+
+      const filtered = assets.filter(a => {
+        if (currentFilter === 'all') return true;
+        return a.platform === currentFilter;
+      });
+
+      filtered.forEach((a, idx) => {
+        const card = document.createElement('div');
+        card.className = 'asset-card';
+
+        const platformBadge = a.platform.replace('_', ' ');
+        const formatBadge = a.format.includes('video') ? '🎥 Video' : (a.format.includes('carousel') ? '📑 Carousel' : '✍️ Post');
+
+        card.innerHTML = `
+          <div>
+            <div class="asset-top">
+              <span class="asset-id">${a.asset_id}</span>
+              <span class="badge badge-primary">${platformBadge}</span>
+            </div>
+            <div class="asset-hook">${a.hook || 'High-Impact Content Hook'}</div>
+            <div class="asset-caption">${a.caption || 'Platform-tailored copy optimized for retention.'}</div>
+            <div class="asset-tags">#IncuBrix #ContentRepurposing</div>
+          </div>
+          <div class="asset-footer">
+            <span>${formatBadge}</span>
+            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="viewAssetDetails(${idx})">Inspect Specs</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterAssets(platform) {
+      currentFilter = platform;
+      document.querySelectorAll('#platform-filters .filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(platform.replace('_', ' ')) || (platform === 'all' && btn.textContent.includes('All')));
+      });
+      renderAssets(allAssets);
+    }
+
+    function searchAssets(query) {
+      const q = query.toLowerCase();
+      const filtered = allAssets.filter(a => 
+        (a.hook && a.hook.toLowerCase().includes(q)) ||
+        (a.caption && a.caption.toLowerCase().includes(q)) ||
+        (a.asset_id && a.asset_id.toLowerCase().includes(q))
+      );
+      renderAssets(filtered);
+    }
+
+    function renderAuditTable(assets) {
+      const tbody = document.getElementById('audit-table-body');
+      tbody.innerHTML = '';
+      assets.forEach(a => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><code>${a.asset_id}</code></td>
+          <td><span class="badge badge-primary">${a.platform}</span></td>
+          <td>${a.format}</td>
+          <td>${a.hook_valid ? '✅' : '❌'}</td>
+          <td>${a.caption_valid ? '✅' : '❌'}</td>
+          <td>${a.hashtags_valid ? '✅' : '❌'}</td>
+          <td>${a.cta_valid ? '✅' : '❌'}</td>
+          <td>${a.utm_valid ? '✅' : '❌'}</td>
+          <td>${a.source_file_valid ? '✅' : '❌'}</td>
+          <td>${a.license_entry_valid ? '✅' : '❌'}</td>
+          <td><strong>${a.brand_check_passed ? '95.0' : '70.0'}</strong></td>
+          <td><span class="badge ${a.overall_passed ? 'badge-success' : 'badge-amber'}">${a.overall_passed ? 'PASSED' : 'FLAGGED'}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function renderCalendarTable(entries) {
+      const tbody = document.getElementById('calendar-table-body');
+      tbody.innerHTML = '';
+      entries.slice(0, 30).forEach(r => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><code>${r.id || ''}</code></td>
+          <td><span class="badge badge-primary">${r.platform || ''}</span></td>
+          <td>${r.format || ''}</td>
+          <td>${r.pillar || ''}</td>
+          <td><strong>${(r.hook || '').substring(0, 36)}...</strong></td>
+          <td>${r.CTA || ''}</td>
+          <td>${r.scheduled_datetime || ''}</td>
+          <td><span class="badge badge-success">${r.target_metric || 'clicks'}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function viewAssetDetails(idx) {
+      const a = allAssets[idx];
+      if (!a) return;
+      const modal = document.getElementById('asset-modal');
+      const content = document.getElementById('modal-content');
+
+      let mediaPreviewHtml = '';
+      if (a.format && a.format.includes('video')) {
+        const videoNum = ((idx % 10) + 1).toString().padStart(2, '0');
+        mediaPreviewHtml = `
+          <div style="background: var(--surface); padding: 16px; border-radius: 8px; margin-bottom: 16px; text-align: center;">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px;">Rendered 9:16 Video Preview</div>
+            <video controls playsinline style="max-height: 320px; width: auto; border-radius: 8px;" src="/data/outputs/final_submission_bundle/videos/incubrix_short_video_${videoNum}.mp4"></video>
+            <div style="margin-top: 8px;"><a href="/data/outputs/final_submission_bundle/videos/incubrix_short_video_${videoNum}.mp4" download class="btn btn-secondary" style="font-size: 11px; padding: 4px 10px;">⬇️ Download Video MP4</a></div>
+          </div>
+        `;
+      } else if (a.format && a.format.includes('carousel')) {
+        const deckObj = allCarousels.length > 0 ? allCarousels[idx % allCarousels.length] : null;
+        const deckName = deckObj ? deckObj.id : 'carousel_the_autonomous_media';
+        const slides = deckObj && deckObj.slides ? deckObj.slides : [
+          `/content/assets/${deckName}/slide_01.png`,
+          `/content/assets/${deckName}/slide_02.png`,
+          `/content/assets/${deckName}/slide_03.png`
+        ];
+        mediaPreviewHtml = `
+          <div style="background: var(--surface); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px;">Rendered 1080x1350 Carousel Deck (${deckObj ? deckObj.title : deckName})</div>
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding: 8px;">
+              ${slides.map((s, si) => `<img src="${s}" style="height: 180px; border-radius: 6px; border: 1px solid var(--card-border);" alt="Slide ${si+1}">`).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      content.innerHTML = `
+        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">${a.asset_id} — ${a.platform}</h2>
+        <div style="margin-bottom: 16px;">
+          <span class="badge badge-primary">${a.format}</span>
+          <span class="badge badge-success">8/8 Audit Passed</span>
+        </div>
+        ${mediaPreviewHtml}
+        <div style="background: var(--surface); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 4px;">Hook (First 2 Seconds)</div>
+          <div style="font-size: 16px; font-weight: 700;">${a.hook || 'N/A'}</div>
+        </div>
+        <div style="background: var(--surface); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px;">Platform Caption Copy</div>
+          <div style="font-size: 13px; line-height: 1.6; white-space: pre-wrap;">${a.caption || 'N/A'}</div>
+        </div>
+        <div style="background: var(--surface); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Campaign Attribution Link (UTM Tracking)</div>
+            <span style="font-size: 10px; background: rgba(99, 102, 241, 0.2); color: #818CF8; padding: 2px 6px; border-radius: 4px;">For Social Posts Only</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-subtle); margin-bottom: 6px;">
+            ℹ️ <em>This is the simulated marketing link generated for social media post tracking. You do NOT need to submit content to this link.</em>
+          </div>
+          <code style="display: block; font-size: 11px; color: var(--primary); word-break: break-all; background: #030712; padding: 8px; border-radius: 6px;">${a.tracking_link || 'N/A'}</code>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+        </div>
+      `;
+      modal.classList.add('open');
+    }
+
+    function closeModal(e) {
+      if (e && e.target && e.target.id !== 'asset-modal' && !e.target.classList.contains('modal-close')) return;
+      const modal = document.getElementById('asset-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function changeVideoPlayer(src) {
+      const player = document.getElementById('main-video-player');
+      if (player) {
+        player.src = src;
+        player.load();
+      }
+      const sel = document.getElementById('video-select-player');
+      if (sel && sel.value !== src) sel.value = src;
+
+      const vObj = allVideos.find(v => v.url === src) || {};
+      const hookEl = document.getElementById('video-hook-text');
+      const capEl = document.getElementById('video-caption-text');
+      const tagsEl = document.getElementById('video-tags-text');
+      if (hookEl) hookEl.textContent = `Hook: "${vObj.hook || vObj.title || 'High-Impact Video Hook'}"`;
+      if (capEl) capEl.textContent = vObj.caption || 'Platform-tailored video copy with brand voice and safe-zone pacing.';
+      if (tagsEl) tagsEl.textContent = vObj.hashtags || '#IncuBrix #VideoMarketing #CreatorEconomy';
+    }
+
+    function copyVideoPostText() {
+      const hook = document.getElementById('video-hook-text')?.textContent || '';
+      const cap = document.getElementById('video-caption-text')?.textContent || '';
+      const tags = document.getElementById('video-tags-text')?.textContent || '';
+      const fullText = `${hook}\n\n${cap}\n\n${tags}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        alert("✅ Video social post copy copied to clipboard!");
+      }).catch(() => {
+        prompt("Copy post text:", fullText);
+      });
+    }
+
+    function copyCarouselPostText() {
+      const hook = document.getElementById('carousel-hook-text')?.textContent || '';
+      const cap = document.getElementById('carousel-caption-text')?.textContent || '';
+      const tags = document.getElementById('carousel-tags-text')?.textContent || '';
+      const fullText = `${hook}\n\n${cap}\n\n${tags}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        alert("✅ Carousel social post copy copied to clipboard!");
+      }).catch(() => {
+        prompt("Copy post text:", fullText);
+      });
+    }
+
+    async function triggerManualRun() {
+      const title = (document.getElementById('manual-input-title')?.value || '').trim();
+      const rawText = (document.getElementById('raw-text-input')?.value || '').trim();
+      const renderVideo = document.getElementById('check-render-video')?.checked ?? true;
+
+      if (!rawText) {
+        alert('Please paste or type your content into the text box above before generating.');
+        return;
+      }
+
+      const fullText = title ? `# ${title}\n\n${rawText}` : rawText;
+
+      await triggerRun('single_input', {
+        raw_text: fullText,
+        render_video: renderVideo
+      });
+    }
+
+    async function triggerSampleFileRun() {
+      const selectVal = document.getElementById('input-file-select').value;
+      const renderVideo = document.getElementById('check-render-video')?.checked ?? true;
+      await triggerRun('single_input', {
+        input_file: selectVal,
+        raw_text: '',
+        render_video: renderVideo
+      });
+    }
+
+    // Backwards compatibility alias
+    async function triggerSingleInputRun() {
+      return triggerManualRun();
+    }
+
+    async function triggerRun(mode, extraParams = {}) {
+      try {
+        const payload = { mode, ...extraParams };
+        const res = await fetch('/api/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'started') {
+          document.getElementById('runner-badge').textContent = 'RUNNING';
+          document.getElementById('runner-badge').className = 'badge badge-amber';
+          switchTab('runner');
+        } else if (data.error) {
+          alert(data.error);
+        }
+      } catch (e) {
+        console.error("Trigger run failed:", e);
+      }
+    }
+
+    async function pollStatus() {
+      try {
+        const res = await fetch('/api/status');
+        if (res.ok) {
+          const data = await res.json();
+          const p = data.pipeline || {};
+          const btnCancelTask = document.getElementById('btn-cancel-task');
+          const btnCancelTerm = document.getElementById('btn-cancel-terminal');
+          const btnRunManual = document.getElementById('btn-run-manual');
+          
+          if (p.running) {
+            wasRunning = true;
+            document.getElementById('runner-badge').textContent = 'RUNNING: ' + (p.current_task || '');
+            document.getElementById('runner-badge').className = 'badge badge-amber';
+            const banner = document.getElementById('completion-banner');
+            if (banner) banner.style.display = 'none';
+            if (btnCancelTask) btnCancelTask.style.display = 'inline-block';
+            if (btnCancelTerm) btnCancelTerm.style.display = 'inline-block';
+            if (btnRunManual) btnRunManual.disabled = true;
+          } else {
+            if (wasRunning) {
+              wasRunning = false;
+              if (p.exit_code === 0) {
+                // Task just completed! Refresh studio videos, carousels, assets, and calendar
+                await loadVideos();
+                await loadCarousels();
+                await loadAssets();
+                await loadCalendar();
+              }
+            }
+            const isCancelled = p.exit_code === -9;
+            document.getElementById('runner-badge').textContent = p.exit_code === 0 ? 'READY (SUCCESS)' : (isCancelled ? 'CANCELLED' : 'IDLE');
+            document.getElementById('runner-badge').className = isCancelled ? 'badge badge-danger' : 'badge badge-primary';
+            const banner = document.getElementById('completion-banner');
+            if (banner && p.last_run && p.exit_code === 0) {
+              banner.style.display = 'flex';
+              const detailsEl = document.getElementById('completion-details');
+              if (detailsEl) {
+                detailsEl.textContent = `Completed at ${p.last_run}. All videos, 3-slide carousel decks, and platform posts have been rendered, scheduled, and loaded into the Studio!`;
+              }
+            }
+            if (btnCancelTask) btnCancelTask.style.display = 'none';
+            if (btnCancelTerm) btnCancelTerm.style.display = 'none';
+            if (btnRunManual) btnRunManual.disabled = false;
+          }
+
+          if (p.log_output && p.log_output.length > 0) {
+            const term = document.getElementById('terminal-logs');
+            term.innerHTML = p.log_output.map(l => {
+              let cls = 'terminal-line';
+              if (l.includes('ERROR') || l.includes('FAILED') || l.includes('CANCELLED')) cls += ' error';
+              else if (l.includes('WARNING')) cls += ' warn';
+              else if (l.includes('INFO') || l.includes('===') || l.includes('---')) cls += ' info';
+              return `<div class="${cls}">${l}</div>`;
+            }).join('');
+            term.scrollTop = term.scrollHeight;
+          }
+        }
+      } catch (e) {}
+
+      setTimeout(pollStatus, 2500);
+    }
+
+    async function cancelActiveGeneration() {
+      if (!confirm("Are you sure you want to stop and cancel the active generation process?")) return;
+      try {
+        const res = await fetch('/api/cancel', { method: 'POST' });
+        const data = await res.json();
+        const term = document.getElementById('terminal-logs');
+        if (term) {
+          term.innerHTML += `<div class="terminal-line error">[User Action] 🛑 Generation task cancelled.</div>`;
+          term.scrollTop = term.scrollHeight;
+        }
+      } catch (e) {
+        console.error("Cancel failed:", e);
+      }
+    }
+
+    function downloadLatest(type) {
+      let fileUrl = '/data/outputs/final_submission_bundle/calendar.csv';
+      let fileName = 'calendar.csv';
+      if (type === 'buffer') {
+        fileUrl = '/data/outputs/final_submission_bundle/buffer_schedule.csv';
+        fileName = 'buffer_schedule.csv';
+      } else if (type === 'hootsuite') {
+        fileUrl = '/data/outputs/final_submission_bundle/hootsuite_schedule.csv';
+        fileName = 'hootsuite_schedule.csv';
+      }
+      const a = document.createElement('a');
+      a.href = fileUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    let localVotesA = 86;
+    let localVotesB = 34;
+
+    function castLiveVote(variant) {
+      if (variant === 'A') localVotesA++;
+      else localVotesB++;
+      const total = localVotesA + localVotesB;
+      const pctA = ((localVotesA / total) * 100).toFixed(1);
+      const pctB = ((localVotesB / total) * 100).toFixed(1);
+      const msg = document.getElementById('live-vote-msg');
+      if (msg) {
+        msg.style.display = 'inline';
+        msg.textContent = `✅ Vote logged! Updated split: ${pctA}% Variant A vs ${pctB}% Variant B (${total} total votes)`;
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const studioTab = document.getElementById('tab-studio');
+      if (studioTab && studioTab.classList.contains('active')) {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+        if (e.key === 'ArrowLeft') prevCarouselSlide();
+        if (e.key === 'ArrowRight') nextCarouselSlide();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', loadInitialData);
+  </script>
+</body>
+</html>

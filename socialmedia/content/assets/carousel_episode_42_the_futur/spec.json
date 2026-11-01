@@ -1,0 +1,56 @@
+{
+  "asset_id": "carousel_episode_42_the_futur",
+  "asset_type": "carousel_1080x1350",
+  "width": 1080,
+  "height": 1350,
+  "slides_count": 3,
+  "font_name": "DejaVu Sans Bold",
+  "font_license": "Bitstream Vera & Arev Fonts License (Free / Open Source)",
+  "brand_palette": {
+    "primary": "#0F172A",
+    "secondary": "#6366F1",
+    "accent": "#10B981",
+    "background": "#030712",
+    "card_bg": "#1E293B",
+    "text_primary": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "slides": [
+    {
+      "slide_number": 1,
+      "slide_type": "cover",
+      "category": "CREATOR BLUEPRINT",
+      "title": "Stop wasting hours on episode 42 the future of content operati.",
+      "body_points": [
+        "Automating multi-platform video repurposing while protecting creator voice."
+      ],
+      "tip": null,
+      "cta_text": null
+    },
+    {
+      "slide_number": 2,
+      "slide_type": "content",
+      "category": "WORKFLOW",
+      "title": "Key Insight & Framework",
+      "body_points": [
+        "Fast cutdowns",
+        "Safe-zone alignment",
+        "Consistent publishing"
+      ],
+      "tip": "High-retention hooks must interrupt the scroll in under 2 seconds.",
+      "cta_text": null
+    },
+    {
+      "slide_number": 3,
+      "slide_type": "cta",
+      "category": "ACTION",
+      "title": "Scale Your Content Operations",
+      "body_points": [
+        "How does your team handle repurposing?"
+      ],
+      "tip": null,
+      "cta_text": "Follow @IncuBrix \u2022 Link in bio"
+    }
+  ],
+  "created_at": "2026-10-23T16:35:28Z"
+}

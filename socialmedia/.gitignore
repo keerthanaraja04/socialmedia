@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Output and logs
+data/outputs/*
+!data/outputs/.gitkeep
+data/logs/*
+!data/logs/.gitkeep
+data/dedupe_cache.json
+*.log
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MoviePy / ffmpeg temp
+__temp__.mp4
+*temp-audio.mp3

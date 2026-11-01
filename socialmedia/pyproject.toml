@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "incubrix-engine"
+version = "0.1.0"
+description = "AI-powered automated content ingestion, generation, brand-compliance, and video packaging engine using Groq"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Incubrix Team" }
+]
+dependencies = [
+    "groq>=0.9.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0.1",
+    "requests>=2.31.0",
+    "pillow>=10.2.0",
+    "moviepy>=1.0.3,<2.0.0",
+    "imageio-ffmpeg>=0.4.9",
+    "scikit-learn>=1.3.0",
+    "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-mock>=3.12.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --import-mode=importlib"
+testpaths = [
+    "tests",
+]
+pythonpath = [
+    ".",
+]

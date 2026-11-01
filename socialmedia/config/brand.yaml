@@ -1,0 +1,155 @@
+brand:
+  name: "IncuBrix"
+  tagline: "The High-Velocity Repurposing & Distribution Engine for Modern Creators"
+
+  audience:
+    primary: "Creators (podcasters, YouTubers, expert-led creators) and their editors/small teams"
+    geographic_markets:
+      - "US"  # United States
+      - "CA"  # Canada
+      - "UK"  # United Kingdom
+      - "IE"  # Ireland
+      - "AU"  # Australia
+      - "NZ"  # New Zealand
+      - "SG"  # Singapore
+    creator_profiles:
+      - "Podcasters (interview shows and solo video podcasts needing rapid cutdowns)"
+      - "YouTubers (long-form educational, tech, and commentary creators scaling shorts)"
+      - "Expert-Led Creators (founders, strategists, and consultants building authority)"
+      - "Video Editors & Media Leads (freelancers and small teams managing 4+ platform drops)"
+    core_pain_points:
+      - "Editing bottlenecks: spending 10+ hours per episode manually chopping and reformatting"
+      - "Hook fatigue: struggle to write platform-native hooks that stop the scroll in 1.5s"
+      - "Context erosion: generic AI tools produce sterile, robotic summaries that lose creator nuance"
+      - "Safe zone & formatting friction across TikTok, Reels, Shorts, and LinkedIn"
+
+  tone:
+    primary: "practitioner-led"
+    secondary: "pragmatic & authoritative"
+    style: "direct, sharp, creator-fluent, anti-hype, highly actionable"
+
+  voice_rules:
+    - rule: "Speak like a seasoned editor/creative director, not a corporate marketer"
+      do: "Use creator and editing vocabulary naturally: B-roll, hooks, retention curves, safe zones, pattern interrupts, cold opens, cadence, aspect ratios."
+      dont: "Never use corporate speak like 'leverage holistic synergies', 'unlock paradigm shifts', or 'optimize enterprise value'."
+    - rule: "Respect creator craft and creative judgment"
+      do: "Frame IncuBrix as an intelligent co-pilot that eliminates boring mechanical tasks so creators and editors can focus on elite storytelling."
+      dont: "Never claim AI can or should replace the creator, their point of view, or their personal connection with the audience."
+    - rule: "Deliver concrete operational leverage without false hype"
+      do: "Spotlight real workflow wins: publish 15 high-retention clips from 1 episode, maintain strict posting schedules, reclaim 8+ editing hours weekly."
+      dont: "Never promise 'guaranteed virality', 'push-button riches', or 'effortless algorithmic domination'."
+    - rule: "Enforce scroll-stopping, high-retention openings"
+      do: "Lead with immediate narrative tension, a counter-intuitive observation, or an acute creator struggle in the first 2 lines."
+      dont: "Never start with polite throat-clearing, 'In this video/post...', or generic pleasantries."
+    - rule: "Tailor the voice natively to each platform"
+      do: "Keep LinkedIn thought-provoking and industry-focused; keep TikTok/Reels kinetic, candid, and fast-paced; keep YouTube Shorts punchy and loopable."
+      dont: "Never copy-paste the exact same caption or hook across different platforms."
+
+  banned_phrases:
+    - "guaranteed returns"
+    - "get rich quick"
+    - "100% risk free"
+    - "cheap"
+    - "foolproof"
+    - "miracle solution"
+    - "unrivaled"
+    - "best in the world"
+    - "game-changer"
+    - "revolutionary"
+    - "10x your growth overnight"
+    - "guaranteed viral"
+    - "set and forget"
+    - "push-button magic"
+    - "passive income"
+    - "replace your editor"
+    - "replace your team"
+    - "effortless fame"
+    - "secret cheat code"
+    - "hack the algorithm"
+
+  content_pillars:
+    - name: "The Repurposing Engine"
+      description: "Workflows and architectures to turn 1 hour of long-form audio/video into 15+ platform-native micro-assets without sacrificing quality."
+      focus_topics:
+        - "Extracting high-voltage narrative hooks from 60-minute podcast interviews"
+        - "Building an automated weekly content cascade from YouTube drops"
+        - "Eliminating the post-production bottleneck between creators and editors"
+    - name: "Hook & Retention Mechanics"
+      description: "Deconstructing first-3-second retention, visual pattern interrupts, and dynamic pacing across vertical video platforms."
+      focus_topics:
+        - "Why what works on LinkedIn flops on TikTok (and vice versa)"
+        - "Pacing, audio cadence, and subtitle placement inside platform safe zones"
+        - "The anatomy of high-retention openings for expert-led and technical creators"
+    - name: "Editor & Producer Superpowers"
+      description: "Helping freelance editors and small post-production teams double their client capacity and elevate their creative value."
+      focus_topics:
+        - "Automating aspect ratio adaptations, transcription cleanups, and rough cuts"
+        - "Standardizing brand presets, typography, and color grading across clients"
+        - "Transitioning from low-rate cutdown editor to high-leverage growth partner"
+    - name: "Anti-Slop Brand Defense"
+      description: "Maintaining unmistakable creator voice, verified facts, and visual distinction in an internet flooded with generic AI noise."
+      focus_topics:
+        - "Why generic AI scripts destroy creator authority and audience trust"
+        - "Strict verification of claims and product capabilities before publishing"
+        - "Building an authentic, defensible personal media franchise"
+    - name: "Audience-to-Asset Conversion"
+      description: "Converting passive short-form scrollers into dedicated podcast listeners, newsletter subscribers, and high-ticket clients."
+      focus_topics:
+        - "Crafting high-converting, platform-tailored CTAs that don't sound desperate"
+        - "Flipping viral social attention into owned community and email subscribers"
+        - "Direct monetization models for expert creators and specialist media teams"
+
+  # Claims outside this list must be rejected
+  verified_features: []
+
+  visual:
+    palette:
+      primary: "#0F172A"       # Dark Slate
+      secondary: "#6366F1"     # Electric Violet / Indigo
+      accent: "#10B981"        # Emerald Green
+      background: "#030712"    # Midnight Dark
+      card_bg: "#1E293B"       # Slate Card
+      text_primary: "#F8FAFC"  # Clean White
+      text_muted: "#94A3B8"    # Muted Slate
+    typography:
+      heading_font: "Helvetica"
+      body_font: "Arial"
+      font_weight_bold: true
+    watermark:
+      enabled: true
+      text: "IncuBrix"
+      position: "top_right"
+      opacity: 0.85
+      margin: 40
+
+  rules:
+    prohibited_words:
+      - "guaranteed returns"
+      - "get rich quick"
+      - "100% risk free"
+      - "cheap"
+      - "foolproof"
+      - "miracle solution"
+      - "unrivaled"
+      - "best in the world"
+      - "game-changer"
+      - "revolutionary"
+      - "10x your growth overnight"
+      - "guaranteed viral"
+      - "set and forget"
+      - "push-button magic"
+      - "passive income"
+      - "replace your editor"
+      - "replace your team"
+    required_keywords:
+      - "creator"
+      - "workflow"
+      - "content"
+    mandatory_hashtags:
+      - "#IncuBrix"
+      - "#Incubrix"
+      - "#CreatorEconomy"
+      - "#VideoRepurposing"
+      - "#TechInnovation"
+    min_compliance_score: 80
+    max_sentence_length_words: 25

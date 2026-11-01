@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IncuBrix Content A/B Preference Evaluation Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030712;
+      --card-bg: #0F172A;
+      --card-border: #1E293B;
+      --primary: #6366F1;
+      --primary-hover: #4F46E5;
+      --accent: #10B981;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --danger: #EF4444;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 32px 16px 80px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Google Forms Header Banner Card */
+    .form-header-card {
+      background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+      border: 1px solid #312E81;
+      border-top: 8px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .form-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .respondent-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    @media (max-width: 600px) {
+      .respondent-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      border-color: var(--primary);
+    }
+
+    /* Test Comparison Cards */
+    .test-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .test-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .test-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .test-dim {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .test-prompt {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: var(--text-main);
+    }
+
+    .variants-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .variants-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .variant-option {
+      background: #1E293B;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .variant-option:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      background: #243248;
+    }
+
+    .variant-option.selected {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.12);
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+    }
+
+    .variant-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .variant-option.selected .variant-label {
+      color: var(--accent);
+    }
+
+    .variant-text {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .radio-circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #64748B;
+      display: inline-block;
+      vertical-align: middle;
+      transition: all 0.2s;
+    }
+
+    .variant-option.selected .radio-circle {
+      border-color: var(--accent);
+      background-color: var(--accent);
+      box-shadow: inset 0 0 0 3px #1E293B;
+    }
+
+    .rationale-input {
+      width: 100%;
+      background: #141E33;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    /* Actions & Floating Footer */
+    .actions-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #030712;
+      font-weight: 700;
+    }
+
+    .btn-accent:hover {
+      background: #0EA5E9;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-muted);
+      color: var(--text-main);
+    }
+
+    /* Analytics Live Chart Card */
+    .chart-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-top: 36px;
+    }
+
+    .chart-row {
+      margin-bottom: 20px;
+    }
+
+    .chart-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .bar-container {
+      height: 24px;
+      background: #1E293B;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-a {
+      height: 100%;
+      background: linear-gradient(90deg, #6366F1, #818CF8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      transition: width 0.5s ease;
+    }
+
+    .bar-b {
+      height: 100%;
+      background: linear-gradient(90deg, #10B981, #34D399);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #030712;
+      transition: width 0.5s ease;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    .badge-win-a { background: rgba(99, 102, 241, 0.2); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.4); }
+    .badge-win-b { background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header Card -->
+  <div class="form-header-card">
+    <div class="brand-tag">INCUBRIX // AUDIENCE LABS</div>
+    <h1>Content A/B Preference Evaluation Form</h1>
+    <p class="form-desc">
+      Help us evaluate competing creative variants for the upcoming IncuBrix launch campaign.
+      Review the 5 side-by-side comparisons below and select the option you find more compelling.
+    </p>
+
+    <div class="respondent-bar">
+      <div class="input-group">
+        <label for="respondentId">Respondent Name / ID</label>
+        <input type="text" id="respondentId" placeholder="e.g. resp_01 (Jane Doe)" value="resp_01">
+      </div>
+      <div class="input-group">
+        <label for="audienceSegment">Target Audience Segment</label>
+        <select id="audienceSegment">
+          <option value="Creator / Podcaster">Creator / Podcaster</option>
+          <option value="Video Editor / Producer">Video Editor / Producer</option>
+          <option value="B2B Marketing Lead">B2B Marketing Lead</option>
+          <option value="Technical Founder">Technical Founder</option>
+          <option value="Social Media Manager">Social Media Manager</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Comparisons -->
+  <form id="preferenceForm">
+
+    <!-- Comparison 1 -->
+    <div class="test-card" data-testid="test_01" data-dim="Video Hook (First 2s Pattern Interrupt)">
+      <div class="test-meta">
+        <span class="test-badge">Test 1 of 5</span>
+        <span class="test-dim">Short-Form Video Hook</span>
+      </div>
+      <div class="test-prompt">Which opening line would make you stop scrolling in the first 2 seconds?</div>
+
+      <div class="variants-grid">
+        <div class="variant-option" onclick="selectVariant(this, 'test_01', 'A')">
+          <div class="variant-label">
+            <span>Variant A (Declarative Imperative)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "Stop cutting video cutdowns manually. Here is how modern media teams automate 15 clips a week without losing nuance."
+          </div>
+        </div>
+
+        <div class="variant-option" onclick="selectVariant(this, 'test_01', 'B')">
+          <div class="variant-label">
+            <span>Variant B (Contrarian Metric)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "Why 65% of your video viewers drop off before second 3 on TikTok—and the simple safe-zone fix to save your retention curve."
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="rationale-input" placeholder="Brief reason for your pick (optional)..." id="rationale_test_01">
+    </div>
+
+    <!-- Comparison 2 -->
+    <div class="test-card" data-testid="test_02" data-dim="LinkedIn Carousel Title Slide">
+      <div class="test-meta">
+        <span class="test-badge">Test 2 of 5</span>
+        <span class="test-dim">LinkedIn Carousel Title</span>
+      </div>
+      <div class="test-prompt">Which carousel title deck would you be more likely to save/bookmark?</div>
+
+      <div class="variants-grid">
+        <div class="variant-option" onclick="selectVariant(this, 'test_02', 'A')">
+          <div class="variant-label">
+            <span>Variant A (System Blueprint)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "The 3-Step Autonomous Repurposing Blueprint: How to scale from 1 podcast to 30 platform assets in under 3 minutes."
+          </div>
+        </div>
+
+        <div class="variant-option" onclick="selectVariant(this, 'test_02', 'B')">
+          <div class="variant-label">
+            <span>Variant B (Contrarian Case Study)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "Why we fired our timeline-scrubbing workflow and replaced it with a deterministic Groq LPU engine."
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="rationale-input" placeholder="Brief reason for your pick (optional)..." id="rationale_test_02">
+    </div>
+
+    <!-- Comparison 3 -->
+    <div class="test-card" data-testid="test_03" data-dim="Caption Pacing & Safe Zones">
+      <div class="test-meta">
+        <span class="test-badge">Test 3 of 5</span>
+        <span class="test-dim">Platform Copy Formatting</span>
+      </div>
+      <div class="test-prompt">Which caption style reads better on mobile?</div>
+
+      <div class="variants-grid">
+        <div class="variant-option" onclick="selectVariant(this, 'test_03', 'A')">
+          <div class="variant-label">
+            <span>Variant A (Punchy Structured Takeaways)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            1. Stop the scroll in 2s.<br>
+            2. Never place captions under the TikTok comment sidebar.<br>
+            3. Build repeatable pipelines, not one-off edits.<br>
+            #IncuBrix #CreatorEconomy
+          </div>
+        </div>
+
+        <div class="variant-option" onclick="selectVariant(this, 'test_03', 'B')">
+          <div class="variant-label">
+            <span>Variant B (Narrative Story Arc)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            Last month, we spent 18 hours manually trimming B-roll. It was exhausting. So we built an engine that runs Whisper on Groq LPUs. The result? 15 clips in 60 seconds.<br>
+            #IncuBrix #TechInnovation
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="rationale-input" placeholder="Brief reason for your pick (optional)..." id="rationale_test_03">
+    </div>
+
+    <!-- Comparison 4 -->
+    <div class="test-card" data-testid="test_04" data-dim="Call to Action (CTA)">
+      <div class="test-meta">
+        <span class="test-badge">Test 4 of 5</span>
+        <span class="test-dim">Call to Action (CTA)</span>
+      </div>
+      <div class="test-prompt">Which closing call-to-action would make you click the link?</div>
+
+      <div class="variants-grid">
+        <div class="variant-option" onclick="selectVariant(this, 'test_04', 'A')">
+          <div class="variant-label">
+            <span>Variant A (Product Direct)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "Inspect our open engine architecture and test the CLI: https://incubrix.com • Link in bio"
+          </div>
+        </div>
+
+        <div class="variant-option" onclick="selectVariant(this, 'test_04', 'B')">
+          <div class="variant-label">
+            <span>Variant B (Community & Value)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            "Follow @IncuBrix for weekly engineering breakdowns and grab our free media automation templates."
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="rationale-input" placeholder="Brief reason for your pick (optional)..." id="rationale_test_04">
+    </div>
+
+    <!-- Comparison 5 -->
+    <div class="test-card" data-testid="test_05" data-dim="Thumbnail Visual Aesthetic">
+      <div class="test-meta">
+        <span class="test-badge">Test 5 of 5</span>
+        <span class="test-dim">Visual Aesthetic</span>
+      </div>
+      <div class="test-prompt">Which visual design direction feels more premium?</div>
+
+      <div class="variants-grid">
+        <div class="variant-option" onclick="selectVariant(this, 'test_05', 'A')">
+          <div class="variant-label">
+            <span>Variant A (Dark Slate & Indigo Tech)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            Deep #0F172A slate backdrop, electric indigo (#6366F1) pill badge, bold white typography, clean monospace terminal accents.
+          </div>
+        </div>
+
+        <div class="variant-option" onclick="selectVariant(this, 'test_05', 'B')">
+          <div class="variant-label">
+            <span>Variant B (Emerald High-Energy Glow)</span>
+            <span class="radio-circle"></span>
+          </div>
+          <div class="variant-text">
+            High-contrast emerald green (#10B981) glowing borders, energetic gradient cards, and large creator-centric soundbite callouts.
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="rationale-input" placeholder="Brief reason for your pick (optional)..." id="rationale_test_05">
+    </div>
+
+  </form>
+
+  <!-- Actions -->
+  <div class="actions-panel">
+    <button class="btn btn-primary" onclick="submitSingleVote()">Submit My Vote</button>
+    <button class="btn btn-accent" onclick="simulate20AudienceVotes()">Simulate 24 Audience Responses (Demo Mode)</button>
+    <button class="btn btn-outline" onclick="downloadResponsesCSV()">Export Responses (CSV)</button>
+    <button class="btn btn-outline" onclick="resetForm()">Reset All</button>
+  </div>
+
+  <!-- Live Preference Analytics Dashboard -->
+  <div class="chart-card" id="analyticsCard">
+    <h2 style="font-size: 18px; margin-bottom: 6px;">Live Audience Preference Breakdown (<span id="respCount">0</span> Respondents)</h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Real-time percentage preference between Variant A (Indigo) and Variant B (Emerald).</p>
+
+    <div id="chartContainer">
+      <!-- Dynamically generated rows -->
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // In-memory response repository
+  let responses = [];
+
+  const TESTS = [
+    { id: 'test_01', dim: 'Video Hook (First 2s Pattern Interrupt)' },
+    { id: 'test_02', dim: 'LinkedIn Carousel Title Slide' },
+    { id: 'test_03', dim: 'Caption Pacing & Safe Zones' },
+    { id: 'test_04', dim: 'Call to Action (CTA)' },
+    { id: 'test_05', dim: 'Thumbnail Visual Aesthetic' },
+  ];
+
+  const currentVotes = {
+    test_01: null,
+    test_02: null,
+    test_03: null,
+    test_04: null,
+    test_05: null,
+  };
+
+  function selectVariant(element, testId, variant) {
+    const parentCard = element.closest('.test-card');
+    parentCard.querySelectorAll('.variant-option').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+    currentVotes[testId] = variant;
+  }
+
+  function submitSingleVote() {
+    const respId = document.getElementById('respondentId').value.trim() || 'resp_' + (responses.length + 1);
+    const segment = document.getElementById('audienceSegment').value;
+    const nowIso = new Date().toISOString();
+
+    let answered = 0;
+    TESTS.forEach(t => {
+      const v = currentVotes[t.id];
+      if (v) {
+        answered++;
+        const rationale = document.getElementById('rationale_' + t.id)?.value || '';
+        responses.push({
+          respondent_id: respId,
+          audience_segment: segment,
+          test_id: t.id,
+          test_dimension: t.dim,
+          variant_chosen: v,
+          confidence_rating: 5,
+          rationale: rationale,
+          timestamp: nowIso
+        });
+      }
+    });
+
+    if (answered === 0) {
+      alert('Please vote on at least one comparison before submitting!');
+      return;
+    }
+
+    alert(`Successfully recorded votes from ${respId} (${answered} tests answered)!`);
+    updateAnalyticsView();
+    // Advance respondent ID
+    const nextNum = responses.length > 0 ? (new Set(responses.map(r => r.respondent_id)).size + 1) : 2;
+    document.getElementById('respondentId').value = 'resp_' + String(nextNum).padStart(2, '0');
+  }
+
+  function simulate20AudienceVotes() {
+    const segments = [
+      'Creator / Podcaster', 'Video Editor / Producer',
+      'B2B Marketing Lead', 'Technical Founder', 'Social Media Manager'
+    ];
+
+    // Seeded distributions representing 24 realistic target-audience responses
+    const targetCount = 24;
+    const sampleRationales = [
+      'Variant A gets straight to the point without filler.',
+      'Variant B provides relatable metrics that make me curious.',
+      'Much easier to read on mobile.',
+      'Clear, actionable, and brand-safe.',
+      'Love the technical, non-hyped tone.'
+    ];
+
+    for (let i = 1; i <= targetCount; i++) {
+      const respId = 'audience_member_' + String(i).padStart(2, '0');
+      const segment = segments[i % segments.length];
+      const nowIso = new Date(Date.now() - (targetCount - i) * 60000).toISOString();
+
+      TESTS.forEach((t, tIdx) => {
+        // Natural distribution: 60-70% favor Variant A on hooks, 55% favor Variant B on carousels
+        let pick = 'A';
+        const rand = Math.random();
+        if (t.id === 'test_01') pick = rand < 0.68 ? 'A' : 'B';
+        else if (t.id === 'test_02') pick = rand < 0.58 ? 'A' : 'B';
+        else if (t.id === 'test_03') pick = rand < 0.72 ? 'A' : 'B';
+        else if (t.id === 'test_04') pick = rand < 0.64 ? 'A' : 'B';
+        else pick = rand < 0.60 ? 'A' : 'B';
+
+        responses.push({
+          respondent_id: respId,
+          audience_segment: segment,
+          test_id: t.id,
+          test_dimension: t.dim,
+          variant_chosen: pick,
+          confidence_rating: 4 + Math.round(Math.random()),
+          rationale: sampleRationales[(i + tIdx) % sampleRationales.length],
+          timestamp: nowIso
+        });
+      });
+    }
+
+    alert(`Generated 24 simulated audience survey responses across 5 segments! Check the analytics below.`);
+    updateAnalyticsView();
+  }
+
+  function updateAnalyticsView() {
+    const distinctResp = new Set(responses.map(r => r.respondent_id)).size;
+    document.getElementById('respCount').innerText = distinctResp;
+
+    const container = document.getElementById('chartContainer');
+    container.innerHTML = '';
+
+    TESTS.forEach(t => {
+      const testVotes = responses.filter(r => r.test_id === t.id);
+      const total = testVotes.length;
+      const countA = testVotes.filter(r => r.variant_chosen === 'A').length;
+      const countB = testVotes.filter(r => r.variant_chosen === 'B').length;
+
+      const pctA = total > 0 ? Math.round((countA / total) * 100) : 50;
+      const pctB = total > 0 ? (100 - pctA) : 50;
+
+      const winnerBadge = pctA > pctB 
+        ? `<span class="status-badge badge-win-a">Variant A Wins (+${pctA - pctB}%)</span>`
+        : (pctB > pctA ? `<span class="status-badge badge-win-b">Variant B Wins (+${pctB - pctA}%)</span>` : `<span class="status-badge">Tied</span>`);
+
+      const rowHtml = `
+        <div class="chart-row">
+          <div class="chart-labels">
+            <span>${t.dim} ${total > 0 ? winnerBadge : ''}</span>
+            <span>A: ${pctA}% (${countA}) &bull; B: ${pctB}% (${countB})</span>
+          </div>
+          <div class="bar-container">
+            <div class="bar-a" style="width: ${pctA}%">${pctA > 15 ? 'Variant A: ' + pctA + '%' : ''}</div>
+            <div class="bar-b" style="width: ${pctB}%">${pctB > 15 ? 'Variant B: ' + pctB + '%' : ''}</div>
+          </div>
+        </div>
+      `;
+      container.innerHTML += rowHtml;
+    });
+  }
+
+  function downloadResponsesCSV() {
+    if (responses.length === 0) {
+      alert('No survey responses recorded yet. Vote or click "Simulate 24 Audience Responses" first.');
+      return;
+    }
+
+    const headers = ['respondent_id', 'audience_segment', 'test_id', 'test_dimension', 'variant_chosen', 'confidence_rating', 'rationale', 'timestamp'];
+    const rows = [headers.join(',')];
+
+    responses.forEach(r => {
+      const safeRat = '"' + (r.rationale || '').replace(/"/g, '""') + '"';
+      rows.push([
+        r.respondent_id,
+        `"${r.audience_segment}"`,
+        r.test_id,
+        `"${r.test_dimension}"`,
+        r.variant_chosen,
+        r.confidence_rating,
+        safeRat,
+        r.timestamp
+      ].join(','));
+    });
+
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'preference_responses.csv';
+    link.click();
+  }
+
+  function resetForm() {
+    responses = [];
+    document.querySelectorAll('.variant-option').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.rationale-input').forEach(el => el.value = '');
+    Object.keys(currentVotes).forEach(k => currentVotes[k] = null);
+    updateAnalyticsView();
+  }
+
+  // Initialize view
+  updateAnalyticsView();
+</script>
+</body>
+</html>

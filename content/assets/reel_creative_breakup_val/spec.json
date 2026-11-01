@@ -1,0 +1,54 @@
+{
+  "asset_id": "reel_creative_breakup_val",
+  "asset_type": "video_vertical_9_16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 14.18,
+  "mode": "voiceover_and_captions",
+  "font_name": "DejaVu Sans Bold",
+  "font_license": "Bitstream Vera & Arev Fonts License (Free / Open Source)",
+  "brand_palette": {
+    "primary": "#0F172A",
+    "secondary": "#6366F1",
+    "accent": "#10B981",
+    "card_bg": "#1E293B",
+    "text_primary": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "hook_overlay": {
+    "text": "Stop taking creative breaks personally.",
+    "category": "INCUBRIX // BREAKTHROUGH",
+    "start_sec": 0.0,
+    "end_sec": 2.0
+  },
+  "captions": [
+    {
+      "start_sec": 2.0,
+      "end_sec": 5.04,
+      "text": "Vibes do not replace viable systems."
+    },
+    {
+      "start_sec": 5.04,
+      "end_sec": 8.09,
+      "text": "Misaligned goals kill momentum faster than bad content."
+    },
+    {
+      "start_sec": 8.09,
+      "end_sec": 11.13,
+      "text": "Cut the cord to protect your brand integrity."
+    },
+    {
+      "start_sec": 11.13,
+      "end_sec": 14.18,
+      "text": "Tag someone you cut loose for business reasons."
+    }
+  ],
+  "source_clip": {
+    "filename": "broll_pixabay_12127_footage.mp4",
+    "pixabay_id": 12127,
+    "author": "badzhoo"
+  },
+  "tts_voice": "en-US-AndrewNeural",
+  "created_at": "2026-10-24T19:12:24Z"
+}

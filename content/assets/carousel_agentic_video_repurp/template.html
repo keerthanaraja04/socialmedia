@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editable Carousel Spec: carousel_agentic_video_repurp</title>
+  <style>
+    :root {
+      --bg: #030712;
+      --primary: #0F172A;
+      --secondary: #6366F1;
+      --accent: #10B981;
+      --card-bg: #1E293B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .header { margin-bottom: 30px; border-bottom: 1px solid var(--card-bg); padding-bottom: 20px; }
+    .badge { background: var(--secondary); padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+    .carousel-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+    .slide-card {
+      min-width: 320px;
+      max-width: 320px;
+      height: 400px;
+      background: var(--card-bg);
+      border: 2px solid var(--secondary);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .slide-badge { color: var(--accent); font-size: 11px; font-weight: bold; }
+    .slide-title { font-size: 18px; margin: 10px 0; line-height: 1.3; }
+    .slide-points { padding-left: 18px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .slide-tip { background: var(--primary); border: 1px solid var(--accent); padding: 8px 12px; border-radius: 8px; font-size: 11px; }
+    .slide-cta { background: var(--secondary); text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Editable Carousel: carousel_agentic_video_repurp</h1>
+    <p>Ratio: 4:5 (1080x1350) | Total Slides: 3 | Font: <span class="badge">DejaVu Sans Bold</span> (Bitstream Vera & Arev Fonts License (Free / Open Source))</p>
+  </div>
+  <div class="carousel-container">
+
+        <div class="slide-card">
+          <div class="slide-badge">CREATOR BLUEPRINT // SLIDE 1</div>
+          <h2 class="slide-title">Your content pipeline is a bottleneck.</h2>
+          <ul class="slide-points"><li>Automate multi-platform content distribution using deterministic guardrails and high-speed inference.</li></ul>
+          
+          
+        </div>
+        <div class="slide-card">
+          <div class="slide-badge">WORKFLOW // SLIDE 2</div>
+          <h2 class="slide-title">Key Insight & Framework</h2>
+          <ul class="slide-points"><li>Parallel inference cuts production time from hours to minutes.</li><li>Deterministic checks ensure brand safety without manual audits.</li><li>One source becomes ten distinct platform-native assets.</li></ul>
+          <div class="slide-tip"><strong>PRO TIP:</strong> High-retention hooks must interrupt the scroll in under 2 seconds.</div>
+          
+        </div>
+        <div class="slide-card">
+          <div class="slide-badge">ACTION // SLIDE 3</div>
+          <h2 class="slide-title">Scale Your Content Operations</h2>
+          <ul class="slide-points"><li>Audit your current workflow friction.</li></ul>
+          
+          <div class="slide-cta">Follow @IncuBrix • Link in bio</div>
+        </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1080" height="1350" fill="url(#bgGradient)" />
+
+  <!-- Top Badge -->
+  <rect x="80" y="90" width="320" height="50" rx="12" fill="#6366F1" />
+  <text x="100" y="126" font-family="DejaVu Sans, Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">CREATOR BLUEPRINT</text>
+
+  <!-- Title -->
+  <text x="80" y="440" font-family="DejaVu Sans, Arial, sans-serif" font-size="64" font-weight="bold" fill="#F8FAFC">Stop forcing content into format</text>
+
+  <!-- Swipe Pill -->
+  <rect x="80" y="1200" width="920" height="60" rx="16" fill="#1E293B" />
+  <text x="120" y="1242" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="bold" fill="#10B981">SWIPE TO READ ➔</text>
+  <text x="920" y="1242" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="bold" fill="#94A3B8">1 / 3</text>
+</svg>

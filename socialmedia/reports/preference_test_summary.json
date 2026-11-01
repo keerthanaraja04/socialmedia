@@ -1,0 +1,307 @@
+{
+  "total_records": 120,
+  "unique_respondents": 24,
+  "sample_adequacy_met": true,
+  "min_respondents_target": 20,
+  "overall_a_pct": 71.7,
+  "overall_b_pct": 28.3,
+  "audience_segments": {
+    "Creator / Podcaster": 25,
+    "Video Editor / Producer": 25,
+    "B2B Marketing Lead": 25,
+    "Technical Founder": 25,
+    "Social Media Manager": 20
+  },
+  "tests": {
+    "test_01": {
+      "test_id": "test_01",
+      "dimension": "Video Hook (First 2s Pattern Interrupt)",
+      "votes_total": 24,
+      "votes_a": 20,
+      "votes_b": 4,
+      "pct_a": 83.3,
+      "pct_b": 16.7,
+      "winner": "Variant A",
+      "margin_pct": 66.6,
+      "segment_breakdown": {
+        "Creator / Podcaster": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Video Editor / Producer": {
+          "votes_a": 4,
+          "votes_b": 1,
+          "total": 5,
+          "pct_a": 80.0,
+          "pct_b": 20.0
+        },
+        "B2B Marketing Lead": {
+          "votes_a": 4,
+          "votes_b": 1,
+          "total": 5,
+          "pct_a": 80.0,
+          "pct_b": 20.0
+        },
+        "Technical Founder": {
+          "votes_a": 3,
+          "votes_b": 2,
+          "total": 5,
+          "pct_a": 60.0,
+          "pct_b": 40.0
+        },
+        "Social Media Manager": {
+          "votes_a": 4,
+          "votes_b": 0,
+          "total": 4,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        }
+      },
+      "rationales_a": [
+        "Quantified time savings (6 hrs vs 90s) instantly grabs attention without fluff.",
+        "The 90-second metric is compelling for video production teams.",
+        "Pain point is very clear in the first 2 seconds."
+      ],
+      "rationales_b": [
+        "Manual workflow broken is a relatable founder pain point.",
+        "Challenging conventional wisdom stops executive scrollers.",
+        "Focus on the broken workflow resonates with professional editors."
+      ]
+    },
+    "test_02": {
+      "test_id": "test_02",
+      "dimension": "LinkedIn Carousel Title Slide",
+      "votes_total": 24,
+      "votes_a": 15,
+      "votes_b": 9,
+      "pct_a": 62.5,
+      "pct_b": 37.5,
+      "winner": "Variant A",
+      "margin_pct": 25.0,
+      "segment_breakdown": {
+        "Creator / Podcaster": {
+          "votes_a": 0,
+          "votes_b": 5,
+          "total": 5,
+          "pct_a": 0.0,
+          "pct_b": 100.0
+        },
+        "Video Editor / Producer": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "B2B Marketing Lead": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Technical Founder": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Social Media Manager": {
+          "votes_a": 0,
+          "votes_b": 4,
+          "total": 4,
+          "pct_a": 0.0,
+          "pct_b": 100.0
+        }
+      },
+      "rationales_a": [
+        "System architecture diagrams always perform better with tech crowds.",
+        "High credibility title slide converts higher in B2B.",
+        "Architecture framing signals engineering substance."
+      ],
+      "rationales_b": [
+        "Personal narrative feels more authentic on LinkedIn feed.",
+        "Relatable burnout angle resonates with overworked creators.",
+        "Personal tone makes me want to read the full carousel."
+      ]
+    },
+    "test_03": {
+      "test_id": "test_03",
+      "dimension": "Caption Pacing & Safe Zones",
+      "votes_total": 24,
+      "votes_a": 19,
+      "votes_b": 5,
+      "pct_a": 79.2,
+      "pct_b": 20.8,
+      "winner": "Variant A",
+      "margin_pct": 58.4,
+      "segment_breakdown": {
+        "Creator / Podcaster": {
+          "votes_a": 1,
+          "votes_b": 4,
+          "total": 5,
+          "pct_a": 20.0,
+          "pct_b": 80.0
+        },
+        "Video Editor / Producer": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "B2B Marketing Lead": {
+          "votes_a": 4,
+          "votes_b": 1,
+          "total": 5,
+          "pct_a": 80.0,
+          "pct_b": 20.0
+        },
+        "Technical Founder": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Social Media Manager": {
+          "votes_a": 4,
+          "votes_b": 0,
+          "total": 4,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        }
+      },
+      "rationales_a": [
+        "Bullets are way easier to skim on a phone screen.",
+        "Safe margin compliance is crucial for mobile video overlays.",
+        "Concise technical specs are preferred over fluff."
+      ],
+      "rationales_b": [
+        "Conversational hook invites more organic discussion.",
+        "Friendly narrative feels less corporate.",
+        "Storytelling keeps readers engaged through to the end."
+      ]
+    },
+    "test_04": {
+      "test_id": "test_04",
+      "dimension": "Call to Action (CTA)",
+      "votes_total": 24,
+      "votes_a": 14,
+      "votes_b": 10,
+      "pct_a": 58.3,
+      "pct_b": 41.7,
+      "winner": "Variant A",
+      "margin_pct": 16.6,
+      "segment_breakdown": {
+        "Creator / Podcaster": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Video Editor / Producer": {
+          "votes_a": 0,
+          "votes_b": 5,
+          "total": 5,
+          "pct_a": 0.0,
+          "pct_b": 100.0
+        },
+        "B2B Marketing Lead": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Technical Founder": {
+          "votes_a": 0,
+          "votes_b": 5,
+          "total": 5,
+          "pct_a": 0.0,
+          "pct_b": 100.0
+        },
+        "Social Media Manager": {
+          "votes_a": 4,
+          "votes_b": 0,
+          "total": 4,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        }
+      },
+      "rationales_a": [
+        "Comment-to-DM triggers algorithmic velocity much better than bio links.",
+        "Drop keyword CTA delivers the highest inbound conversion in B2B.",
+        "Comment triggers build engagement rank on LinkedIn & IG."
+      ],
+      "rationales_b": [
+        "Developers prefer cloning a repo directly rather than commenting.",
+        "I want to inspect the source code on GitHub immediately.",
+        "Repo link allows engineers to test the CLI locally."
+      ]
+    },
+    "test_05": {
+      "test_id": "test_05",
+      "dimension": "Thumbnail Visual Aesthetic",
+      "votes_total": 24,
+      "votes_a": 18,
+      "votes_b": 6,
+      "pct_a": 75.0,
+      "pct_b": 25.0,
+      "winner": "Variant A",
+      "margin_pct": 50.0,
+      "segment_breakdown": {
+        "Creator / Podcaster": {
+          "votes_a": 2,
+          "votes_b": 3,
+          "total": 5,
+          "pct_a": 40.0,
+          "pct_b": 60.0
+        },
+        "Video Editor / Producer": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "B2B Marketing Lead": {
+          "votes_a": 5,
+          "votes_b": 0,
+          "total": 5,
+          "pct_a": 100.0,
+          "pct_b": 0.0
+        },
+        "Technical Founder": {
+          "votes_a": 3,
+          "votes_b": 2,
+          "total": 5,
+          "pct_a": 60.0,
+          "pct_b": 40.0
+        },
+        "Social Media Manager": {
+          "votes_a": 3,
+          "votes_b": 1,
+          "total": 4,
+          "pct_a": 75.0,
+          "pct_b": 25.0
+        }
+      },
+      "rationales_a": [
+        "Deep Navy looks premium and clean, not like spam.",
+        "Indigo badge stands out nicely on dark feeds.",
+        "Minimalist Navy fits enterprise brand guidelines."
+      ],
+      "rationales_b": [
+        "Emerald glow gives a modern developer terminal vibe.",
+        "Emerald glow pops vibrantly on Instagram dark mode.",
+        "Vibrant emerald draws eye on busy feeds."
+      ]
+    }
+  }
+}

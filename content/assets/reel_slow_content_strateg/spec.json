@@ -1,0 +1,59 @@
+{
+  "asset_id": "reel_slow_content_strateg",
+  "asset_type": "video_vertical_9_16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration_seconds": 12.67,
+  "mode": "voiceover_and_captions",
+  "font_name": "DejaVu Sans Bold",
+  "font_license": "Bitstream Vera & Arev Fonts License (Free / Open Source)",
+  "brand_palette": {
+    "primary": "#0F172A",
+    "secondary": "#6366F1",
+    "accent": "#10B981",
+    "card_bg": "#1E293B",
+    "text_primary": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "hook_overlay": {
+    "text": "Why your daily uploads are failing.",
+    "category": "INCUBRIX // BREAKTHROUGH",
+    "start_sec": 0.0,
+    "end_sec": 2.0
+  },
+  "captions": [
+    {
+      "start_sec": 2.0,
+      "end_sec": 4.13,
+      "text": "Nature grows slowly, not overnight."
+    },
+    {
+      "start_sec": 4.13,
+      "end_sec": 6.27,
+      "text": "Consistency beats viral spikes."
+    },
+    {
+      "start_sec": 6.27,
+      "end_sec": 8.4,
+      "text": "Small daily efforts compound."
+    },
+    {
+      "start_sec": 8.4,
+      "end_sec": 10.54,
+      "text": "Stop chasing hacks."
+    },
+    {
+      "start_sec": 10.54,
+      "end_sec": 12.67,
+      "text": "What is your one daily habit?"
+    }
+  ],
+  "source_clip": {
+    "filename": "broll_pixabay_16111_hawthorn.mp4",
+    "pixabay_id": 16111,
+    "author": "adege"
+  },
+  "tts_voice": "en-US-AndrewNeural",
+  "created_at": "2026-10-24T17:45:29Z"
+}

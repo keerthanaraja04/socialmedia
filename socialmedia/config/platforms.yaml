@@ -1,0 +1,117 @@
+platforms:
+  linkedin:
+    name: "LinkedIn"
+    format: "Text Post with Native Video (MP4) or PDF Carousel Slide Deck"
+    aspect_ratio: "1:1"
+    width: 1080
+    height: 1080
+    fps: 30
+    video_length_limit: "10 minutes max (target sweet spot: 60-90 seconds)"
+    max_duration_seconds: 180
+    min_duration_seconds: 10
+    target_duration_seconds: 75
+    max_caption_length: 3000
+    hashtag_count: "3-5 high-intent professional hashtags (#CreatorEconomy #B2BMedia)"
+    recommended_hashtag_count: 3
+    hook_rules:
+      opening_window: "Lines 1-2 before the '...see more' fold (~140 characters)"
+      rule_description: "Open with a contrarian industry observation, an undeniable data point, or a painful operational bottleneck. Avoid clickbait questions or fluff."
+      visual_hook: "First frame must show clear typography of the core thesis or an expressive speaker mid-statement."
+      pacing: "Measured, confident, authoritative audio cadence with clean subtitles."
+    cta_style: "Practitioner discussion prompt asking peers for their workflows, hot takes, or contrarian viewpoints. Place links naturally in the comments or after the sign-off."
+    audio_codec: "aac"
+    video_codec: "libx264"
+
+  instagram:
+    name: "Instagram"
+    format: "Reels (9:16 Vertical Video MP4) or Carousel (4:5 Images)"
+    aspect_ratio: "9:16"
+    width: 1080
+    height: 1920
+    fps: 30
+    video_length_limit: "90 seconds max (target sweet spot: 25-45 seconds)"
+    max_duration_seconds: 90
+    min_duration_seconds: 5
+    target_duration_seconds: 35
+    max_caption_length: 2200
+    hashtag_count: "3-5 targeted niche and community hashtags in the caption"
+    recommended_hashtag_count: 4
+    hook_rules:
+      opening_window: "First 1.5 seconds"
+      rule_description: "Rapid physical or visual pattern interrupt with bold, high-contrast subtitles centered strictly inside safe zones (avoid top 15% and bottom 22%)."
+      visual_hook: "Quick zoom-in, hand motion, striking graphics transition, or sharp audio sound effect."
+      pacing: "Fast cuts every 2-3 seconds with kinetic on-screen caption animation."
+    cta_style: "'Save this editing workflow for your next cutdown session', or 'Comment ENGINE below and I will send you the breakdown checklist', or tag a creator friend."
+    audio_codec: "aac"
+    video_codec: "libx264"
+
+  instagram_reels:
+    name: "Instagram Reels"
+    format: "Reels (9:16 Vertical Video MP4)"
+    aspect_ratio: "9:16"
+    width: 1080
+    height: 1920
+    fps: 30
+    video_length_limit: "90 seconds max (target sweet spot: 25-45 seconds)"
+    max_duration_seconds: 90
+    min_duration_seconds: 5
+    target_duration_seconds: 35
+    max_caption_length: 2200
+    hashtag_count: "3-5 niche hashtags"
+    recommended_hashtag_count: 4
+    hook_rules:
+      opening_window: "First 1.5 seconds"
+      rule_description: "High energy visual hook and centered subtitle overlays inside safe margins."
+      visual_hook: "Pattern interrupt with bold title card."
+      pacing: "Snappy cuts with background cadence."
+    cta_style: "Save for your next production edit or share with your editor."
+    audio_codec: "aac"
+    video_codec: "libx264"
+
+  youtube_shorts:
+    name: "YouTube Shorts"
+    format: "Vertical Video (9:16 MP4)"
+    aspect_ratio: "9:16"
+    width: 1080
+    height: 1920
+    fps: 30
+    video_length_limit: "60 seconds max (target sweet spot: 35-50 seconds)"
+    max_duration_seconds: 60
+    min_duration_seconds: 15
+    target_duration_seconds: 45
+    max_caption_length: 5000
+    max_title_length: 100
+    max_description_length: 5000
+    hashtag_count: "3 essential hashtags including #shorts in title or top of description"
+    recommended_hashtag_count: 3
+    hook_rules:
+      opening_window: "First 0-2 seconds"
+      rule_description: "Immediate spoken high-stakes question or unexpected statement. Zero intro music ramp-up. Design the ending sentence to loop seamlessly back into the hook."
+      visual_hook: "Engaged direct eye-contact expression or high-action B-roll illustration immediately on screen."
+      pacing: "Dense information delivery with no empty silence; tight audio gating."
+    cta_style: "Subscribe for weekly creator breakdowns, and check the pinned comment for the link to the full podcast/deep-dive YouTube video."
+    audio_codec: "aac"
+    video_codec: "libx264"
+
+  tiktok:
+    name: "TikTok"
+    format: "Vertical Video (9:16 MP4)"
+    aspect_ratio: "9:16"
+    width: 1080
+    height: 1920
+    fps: 30
+    video_length_limit: "60 seconds max (target sweet spot: 20-35 seconds)"
+    max_duration_seconds: 60
+    min_duration_seconds: 7
+    target_duration_seconds: 28
+    max_caption_length: 2200
+    hashtag_count: "4-6 community and trending tags (#CreatorTips #VideoEditing #PodcastClips)"
+    recommended_hashtag_count: 5
+    hook_rules:
+      opening_window: "First 1.5 - 2 seconds"
+      rule_description: "Start mid-sentence or mid-action presenting a deeply relatable creator struggle or curiosity gap. Overlay text hook dead-center in the top half."
+      visual_hook: "High-contrast text hook overlay, raw unpolished camera presence, or rapid B-roll pop."
+      pacing: "Rapid speech cadence, jump-cuts removing all pauses, dynamic background sound."
+    cta_style: "Low-friction interactive comment prompt ('What's your biggest editing headache right now?'), prompt to stitch/duet, or 'Hit follow for part 2'."
+    audio_codec: "aac"
+    video_codec: "libx264"
